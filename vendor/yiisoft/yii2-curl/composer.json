@@ -1,0 +1,27 @@
+{
+    "name": "yiisoft/yii2-curl",
+    "description": "Easy and nice cURL extension with RESTful support for Yii2",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"," curl", "RESTful"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nils Gajsek",
+            "email": "info@linslin.org"
+        }
+    ],
+    "authors": [
+        {
+            "name": "Carsten Brandt",
+            "email": "mail@cebe.cc"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": { "yii\\curl\\": "" }
+    }
+
+}
