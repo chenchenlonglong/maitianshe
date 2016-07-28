@@ -22,8 +22,8 @@ class IndexController extends  CommonController
         $invateModel= new InvateModel();
         $data=$invateModel->getPage($invateModel->find(),$page_info[0],$page_info[1]);
         $time=$create_time=(substr(time(),0,5));
-        $count=$invateModel->find()->where(["like","start_time",$time])->asArray()->count();
-        $data["count_today"]=$count; //今日新增邀请码数量
+        $count_today=$invateModel->find()->where(["like","start_time",$time])->asArray()->count();
+        $data["count_today"]=$count_today; //今日新增邀请码数量
         return $this->renderPartial("index",["data"=>$data]);
     }
 }

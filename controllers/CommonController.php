@@ -24,4 +24,10 @@ class CommonController extends   BaseController
         return [$page,$page_num];
     }
 
+
+
+    public  function  get_time_now(){
+        
+    }
+
 }
