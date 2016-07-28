@@ -10,17 +10,15 @@
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
 </form>
 <div class="pageHeader">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li><a class="add" href="index.php?r=admin/assignment/create" target="dialog" rel="assignment_id_create"><span>新增邀请码</span></a></li>
-        </ul>
-    </div>
+<!--    <div class="panelBar">-->
+<!--        <ul class="toolBar">-->
+<!--            <li><a class="add" href="index.php?r=admin/assignment/create" target="dialog" rel="assignment_id_create"><span>新增邀请码</span></a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
         <div class="searchBar">
             <ul class="searchContent" style="margin-top: 10px;">
-
                 <li>
                     <span>新增邀请码数量:</span>
-                    
                 </li>
                 <li>
                     <span>剩余邀请码数量:</span>
@@ -34,7 +32,7 @@
 </div>
 <div class="pageContent trainListPage">
     <div id="w_list_print">
-        <table class="list" width="100%" targetType="navTab" layoutH="64" style="text-align: center">
+        <table class="list" width="100%" targetType="navTab" layoutH="70" style="text-align: center">
             <thead style="text-align: center">
             <tr>
                 <th width="80">序号</th>
