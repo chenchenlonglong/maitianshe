@@ -17,9 +17,10 @@
     </div>
         <div class="searchBar">
             <ul class="searchContent" style="margin-top: 10px;">
-                
+
                 <li>
                     <span>新增邀请码数量:</span>
+                    
                 </li>
                 <li>
                     <span>剩余邀请码数量:</span>
