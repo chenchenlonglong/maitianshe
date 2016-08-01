@@ -202,7 +202,7 @@ class ActiveRecord extends BaseActiveRecord
      * @param array $params the parameters (name => value) to be bound to the query.
      * @return integer the number of rows updated
      */
-    public static function updateAll($attributes, $condition = '', $params = [])
+    public static function  updateAll($attributes, $condition = '', $params = [])
     {
         $command = static::getDb()->createCommand();
         $command->update(static::tableName(), $attributes, $condition, $params);

@@ -25,9 +25,4 @@ class CommonController extends   BaseController
     }
 
 
-
-    public  function  get_time_now(){
-        
-    }
-
 }

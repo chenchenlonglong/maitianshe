@@ -7,8 +7,10 @@
  */
 namespace app\modules\invate\controllers;
 
+use app\common\Time;
 use app\controllers\CommonController;
 use app\models\InvateModel;
+
 
 class IndexController extends  CommonController
 {
@@ -21,8 +23,7 @@ class IndexController extends  CommonController
         $page_info=$this->get_page_value();
         $invateModel= new InvateModel();
         $data=$invateModel->getPage($invateModel->find(),$page_info[0],$page_info[1]);
-        $time=$create_time=(substr(time(),0,5));
-        $count_today=$invateModel->find()->where(["like","start_time",$time])->asArray()->count();
+        $count_today= $invateModel->select_count(["like","start_time",substr(Time::get_time(),0,5)]);
         $data["count_today"]=$count_today; //今日新增邀请码数量
         return $this->renderPartial("index",["data"=>$data]);
     }

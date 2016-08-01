@@ -14,6 +14,7 @@ $config = [
     'modules' => [
         'admin' => ['class' => 'app\modules\admin\Admin'],
         'invate' => ['class' => 'app\modules\invate\Invate'],
+        'goods' => ['class' => 'app\modules\goods\Goods'],
 
     ],
     'components' => [

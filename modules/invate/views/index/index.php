@@ -10,11 +10,6 @@
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
 </form>
 <div class="pageHeader">
-<!--    <div class="panelBar">-->
-<!--        <ul class="toolBar">-->
-<!--            <li><a class="add" href="index.php?r=admin/assignment/create" target="dialog" rel="assignment_id_create"><span>新增邀请码</span></a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
         <div class="searchBar">
             <ul class="searchContent" style="margin-top: 10px;">
                 <li>
@@ -24,7 +19,14 @@
                         </span>
                         条
                     </span>
-
+                </li>
+                <li>
+                    <span>昨日新增邀请码数量:
+                        <span style="color: red">
+                            <?php echo $data["count_today"];?>
+                        </span>
+                        条
+                    </span>
                 </li>
                 <li>
                     <span>剩余邀请码数量:</span>

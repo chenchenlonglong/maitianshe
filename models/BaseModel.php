@@ -70,4 +70,6 @@ class BaseModel extends ActiveRecord
         $data['data'] = $query->offset(($Page-1)*$page_num)->limit($page_num)->orderby($orderby)->asArray()->all();
         return $data;
     }
+
+
 }
