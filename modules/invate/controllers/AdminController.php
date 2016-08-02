@@ -42,8 +42,8 @@ class AdminController extends CommonController
         $start_time=time(); //申请时间
         $end_time=time()+(3600*24*30); //有效期
         $data=array(
-            'user_id'=>1, //管理员id
-            'user_by_id'=>1, // 团长id
+            'user_id'=>0, //管理员id
+            'user_by_id'=>0, // 团长id
             'invition_flag'=>1, //管理员临时邀请码标识
             'invition_status'=>3004, //已激活状态,临时邀请码都是已激活状态
             'start_time'=>$start_time,

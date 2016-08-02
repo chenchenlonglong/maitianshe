@@ -49,26 +49,22 @@
                 <th width="125">邀请码</th>
                 <th width="100">状态</th>
                 <th width="100">种类</th>
-                <th width="80">获得途径</th>
-                <th width="80">所属会员</th>
-                <th width="80">所属团队</th>
-                <th width="80">操作</th>
+                <th width="80">所属管理员</th>
+                <th width="80">所属团长</th>
             </tr>
             </thead>
             <tbody>
             <?php foreach($data["data"] as $value){?>
-            <tr>
-                <td><?php echo $value["invition_id"];?></td>
-                <td><?php echo date("Y-m-d",$value["start_time"]);?></td>
-                <td><?php echo date("Y-m-d",$value["end_time"]);?></td>
-                <td><?php echo $value["invition_code"];?></td>
-                <td><?php echo Yii::$app->params["invate_status_group"][$value["invition_status"]];?></td>
-                <td><?php echo Yii::$app->params["invate_type"][$value["invition_flag"]];?></td>
-                <td><?php echo $value["user_by_id"];?></td>
-                <td><?php echo $value["invition_id"];?></td>
-                <td><?php echo $value["invition_id"];?></td>
-                <td><?php echo $value["invition_id"];?></td>
-            </tr>
+                <tr>
+                    <td><?php echo $value["invition_id"];?></td>
+                    <td><?php echo date("Y-m-d",$value["start_time"]);?></td>
+                    <td><?php echo date("Y-m-d",$value["end_time"]);?></td>
+                    <td><?php echo $value["invition_code"];?></td>
+                    <td><?php echo Yii::$app->params["invate_status_group"][$value["invition_status"]];?></td>
+                    <td><?php echo Yii::$app->params["invate_type"][$value["invition_flag"]];?></td>
+                    <td><?php echo $value["user_id"];?></td>
+                    <td><?php echo $value["user_by_id"];?></td>
+                </tr>
             <?php }?>
             </tbody>
         </table>
@@ -78,6 +74,7 @@
         <div class="pages">
             <span>显示</span>
             <select name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option value="30"<?php if(isset($data['page_num']) && $data['page_num'] == 30){echo ' selected="selected"';}else{}?>>30</option>
                 <option value="50"<?php if(isset($data['page_num']) && $data['page_num'] == 50){echo ' selected="selected"';}else{}?>>50</option>
                 <option value="100"<?php if(isset($data['page_num']) && $data['page_num'] == 100){echo ' selected="selected"';}else{}?>>100</option>
                 <option value="200"<?php if(isset($data['page_num']) && $data['page_num'] == 200){echo ' selected="selected"';}else{}?>>200</option>
