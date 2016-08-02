@@ -20,7 +20,6 @@ class CommonController extends   BaseController
         $request = yii::$app->request;
         $page = $request->post('pageNum') ? $request->post('pageNum') : 1;
         $page_num = $request->post('numPerPage') ? $request->post('numPerPage') : 30;
-
         return [$page,$page_num];
     }
 
