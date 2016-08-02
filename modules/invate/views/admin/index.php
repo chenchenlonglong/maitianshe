@@ -12,7 +12,7 @@
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
 </form>
 <div class="pageHeader">
-    <form   onsubmit="return navTabSearch(this);" action="index.php?r=invate/admin/get_invate" method="post" class="pageForm required-validate">
+    <form  action="index.php?r=invate/admin/get_invate" method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
@@ -85,25 +85,22 @@
              pageNumShown="10" currentPage="<?php echo isset($data['page'])?$data['page']:0;?>"></div>
     </div>
 </div>
-<script type="text/javascript">
-    $(function(){
-        $(".sub").click(function(){
-            var num =$("#num").val();
-            var num_preg=/ "^\\d+$"/;
-            if(num=="" || !num_preg.test(num)){
-                alert("输入的格式不正确");
-                return;
+<script>
+        $(".sub").click(function () {
+            var num = $("#num").val();
+            var num_preg = /^[0-9]*$/;
+            if(num==""){
+                alert("输入值为空");
+                return false;
             }
-            if(num>5){
+            if (!num_preg.test(num)) {
+                alert("邀请码输入的格式不正确");
+                return false;
+            }
+            if (num > 5) {
                 alert("超过邀请码生成最大限制");
-                return;
+                return false;
             }
-            alertMsg.confirm("您生成邀请码数量为"+num+",是否确认", {
-                okCall: function(){
-                    $(".pageHeader form").submit();
-                }
-
-        })
-    });
+        });
 </script>
 
