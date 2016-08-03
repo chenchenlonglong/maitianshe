@@ -10,16 +10,53 @@
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
 </form>
 <div class="pageHeader">
+    <form   onsubmit="return navTabSearch(this);" action="index.php?r=invite/index/index" method="post" class="pageForm required-validate">
         <div class="searchBar">
-            <ul class="searchContent" style="margin-top: 10px;">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <?php  var_dump($where[0]);?>
+                        所属管理员: <input type="text" name="user_id" value="<?php echo isset($where[0]["user_id"])?$where[0]["user_id"]:"";?>">
+                    </td>
+                    <td>
+                        所属团长: <input type="text" name="user_by_id" value="<?php echo isset($where[0]["user_by_id"])?$where[0]["user_by_id"]:"";?>">
+                    </td>
+                    <td>
+                        状态: <select name="invition_flag">
+                            <option value="">请选择状态</option>
+                            <?php foreach($data["invite_status"] as $key=>$value){?>
+                                <option  <?php if(isset($where[0]["invition_flag"])){if($where[0]["invition_flag"]==$value){echo 'selected="selected"';}}?>   value="<?php echo $key ?>"><?php echo $value?></option>
+                            <?php }?>
+                        </select>
+                    </td>
+                    <td>
+                        种类: <select name="invition_status">
+                            <option value="">请选择种类</option>
+                            <?php foreach($data["invite_status_group"] as $key=>$value){?>
+                                <option  <?php if(isset($where[0]["invition_status"])){if($where[0]["invition_status"]==$value){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
+                            <?php }?>
+                        </select>
+                    </td>
+                    <td>
+                        生成时间：<input type="text"  name="start_time" value="" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
 
-            </ul>
+                    </td>
+                    <td>
+                        有效期：<input type="text"   name="end_time" value="" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
+                    </td>
+                </tr>
+            </table>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
         </div>
-
+    </form>
 </div>
 <div class="pageContent trainListPage">
     <div id="w_list_print">
-        <table class="list" width="100%" targetType="navTab" layoutH="70" style="text-align: center">
+        <table class="list" width="100%" targetType="navTab" layoutH="88" style="text-align: center">
             <thead style="text-align: center">
             <tr>
                 <th width="80">序号</th>
