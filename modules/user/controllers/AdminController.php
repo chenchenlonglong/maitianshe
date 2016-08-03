@@ -14,9 +14,10 @@ use app\models\UserModel;
 class AdminController extends  CommonController
 {
     public  function actionIndex(){
+        $page=$this->get_page_value();
         $userModel=new UserModel();
         //管理员标识
-        
-        return $this->renderPartial("index");
+        $data=   $userModel->getPage($userModel->find(),$page[0],$page[1],"e_active_time",["e_user_level"=>3]);
+        return $this->renderPartial("index",["data"=>$data]);
     }
 }

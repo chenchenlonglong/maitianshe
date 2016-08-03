@@ -6,12 +6,12 @@
  * Time: 9:19
  */
 
-namespace app\modules\invate;
+namespace app\modules\invite;
 use  yii\base\Module;
 
-class Invate extends Module
+class Invite extends Module
 {
-    public $controllerNamespace = 'app\modules\invate\controllers';
+    public $controllerNamespace = 'app\modules\invite\controllers';
 
     public  function  init(){
 

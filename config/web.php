@@ -13,7 +13,7 @@ $config = [
     'timeZone'=>'Asia/Chongqing',
     'modules' => [
         'admin' => ['class' => 'app\modules\admin\Admin'],
-        'invate' => ['class' => 'app\modules\invate\Invate'],
+        'invite' => ['class' => 'app\modules\invite\Invite'],
         'goods' => ['class' => 'app\modules\goods\Goods'],
         'user' => ['class' => 'app\modules\user\User'],
 

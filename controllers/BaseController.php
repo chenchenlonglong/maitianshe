@@ -14,6 +14,8 @@ use yii\web\Session;
 
 class BaseController extends Controller
 {
+
+
     public $enableCsrfValidation = false;
 
     /**

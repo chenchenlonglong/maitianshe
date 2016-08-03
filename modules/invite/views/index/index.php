@@ -5,35 +5,14 @@
  * Time: 9:32
  */
 ?>
-<form id="pagerForm" method="post" action="index.php?r=invate/index/index">
+<form id="pagerForm" method="post" action="index.php?r=invite/index/index">
     <input type="hidden" name="pageNum" value="<?php isset($data['page'])?$data["page"]:0;?>" />
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
 </form>
 <div class="pageHeader">
         <div class="searchBar">
             <ul class="searchContent" style="margin-top: 10px;">
-                <li>
-                    <span>今日新增邀请码数量:
-                        <span style="color: red">
-                            <?php echo $data["count_today"];?>
-                        </span>
-                        条
-                    </span>
-                </li>
-                <li>
-                    <span>昨日新增邀请码数量:
-                        <span style="color: red">
-                            <?php echo $data["count_today"];?>
-                        </span>
-                        条
-                    </span>
-                </li>
-                <li>
-                    <span>剩余邀请码数量:</span>
-                </li>
-                <li>
-                    <span>系统分配邀请码:</span>
-                </li>
+
             </ul>
         </div>
 

@@ -7,24 +7,28 @@
  */
 ?>
 
-<form id="pagerForm" method="post" action="index.php?r=invate/admin/index_temporary">
+<form id="pagerForm" method="post" action="index.php?r=invite/user/index_temporary">
     <input type="hidden" name="pageNum" value="<?php isset($data['page'])?$data["page"]:0;?>" />
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:30;?>" />
 </form>
 <div class="pageHeader">
-    <form  action="index.php?r=invate/admin/get_invate" method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+    <form  action="index.php?r=invite/user/get_invite" method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
                     <td>
-                        管理员临时邀请码生成数量：
-                        <input type="text" name="num"  id="num"/>
+                        所属管理员id ( 微信号 )：
+                        <input type="text" name="admin_id"  id="admin_id"/>
+                    </td>
+                    <td>
+                        团长临时邀请码生成数量：
+                        <input type="text" name="num"  id="num_id"/>
                     </td>
                     <td style="color: red"> 单次生成数量不超过5条</td>
                     <td>
                         <div class="buttonActive">
                             <div class="buttonContent">
-                                <button class="sub">生成</button>
+                                <button class="sub">生  成</button>
                             </div>
                         </div>
                     </td>
@@ -83,22 +87,28 @@
              pageNumShown="10" currentPage="<?php echo isset($data['page'])?$data['page']:0;?>"></div>
     </div>
 </div>
-<script>
-        $(".sub").click(function () {
-            var num = $("#num").val();
-            var num_preg = /^[0-9]*$/;
-            if(num==""){
-                alert("输入值为空");
-                return false;
-            }
-            if (!num_preg.test(num)) {
-                alert("邀请码输入的格式不正确");
-                return false;
-            }
-            if (num > 5) {
-                alert("超过邀请码生成最大限制");
-                return false;
-            }
-        });
-</script>
+<!--<script>-->
+<!--    $(".sub").click(function () {-->
+<!--        var admin_id=$("#admin_id").val();-->
+<!--        if(admin_id==""){-->
+<!--            alert("所属管理员为空");-->
+<!--            return false;-->
+<!--        }-->
+<!--        var num = $("#num_id").val();-->
+<!--        if(num==""){-->
+<!--            alert("生成数量为空");-->
+<!--            return false;-->
+<!--        }-->
+<!---->
+<!--        var num_preg = /^[0-9]*$/;-->
+<!--        if (!num_preg.test(num)) {-->
+<!--            alert("邀请码输入的格式不正确");-->
+<!--            return false;-->
+<!--        }-->
+<!--        if (num > 5) {-->
+<!--            alert("超过邀请码生成最大限制");-->
+<!--            return false;-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
 

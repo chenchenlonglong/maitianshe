@@ -13,6 +13,8 @@ use yii\db\ActiveRecord;
 
 class BaseModel extends ActiveRecord
 {
+    const SUCC=200;
+    const  FAIL=300;
 
     /**
      * 获取列表（分页）

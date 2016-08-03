@@ -15,4 +15,5 @@ class UserModel extends BaseModel
         return "{{hhs_users}}";
     }
 
+
 }
