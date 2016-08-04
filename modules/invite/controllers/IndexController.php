@@ -7,87 +7,102 @@
  */
 namespace app\modules\invite\controllers;
 
-use app\common\Time;
-use app\controllers\CommonController;
+
+use app\controllers\InviteController;
 use app\models\InviteModel;
 use Yii;
 
 
 
-class IndexController extends  CommonController
+class IndexController extends  InviteController
 {
     public $enableCsrfValidation = false;
 
+
     /**
-     * @desc邀请码列表展示
+     * @DESC 生成数据
+     * @return string
      */
     public  function  actionIndex(){
-
-        $where=$this->get_where();
-
+        $post=Yii::$app->request->post();
         $page_info=$this->get_page_value();
+        $sql=$this->get_value($post);
         $inviteModel= new InviteModel();
 
-        $data=$inviteModel->getPage($inviteModel->find(),$page_info[0],$page_info[1],"start_time DESC",$where[0],$where[1][0],$where[1][1]);
 
-        
-        $count_today= $inviteModel->select_count(["like","start_time",substr(Time::get_time(),0,5)]);
-        $data["count_today"]=$count_today; //今日新增邀请码数量
-
+        //查询总条数
+        $result=$inviteModel->findBySql($sql)->asArray()->all();
+        $data=$inviteModel->getPage_by_sql($result,$page_info[0],$page_info[1]);
 
 
+        $start=($page_info[0]-1)*$page_info[1];
+        $sql=$sql."  limit {$start},{$page_info[1]} ;";
+        $result=$inviteModel->findBySql($sql)->asArray()->all();
+
+
+
+        $data["data"]=$result;
         $data["invite_status"]=Yii::$app->params["invate_type"];  //邀请码的状态码
         $data["invite_status_group"]=Yii::$app->params["invate_status_group"]; //邀请码的状态码
-        return $this->renderPartial("index",["data"=>$data,"where"=>$where]);
-    }
-
-
-    public  function  get_where()
-    {
-        $post = Yii::$app->request->post();
-        $where=[
-            "user_id"=>isset($post["user_id"])?$post["user_id"]:"",
-            "user_by_id"=>isset($post["user_by_id"])?$post["user_by_id"]:"",
-            "invition_flag"=>isset($post["invition_flag"])?$post["invition_flag"]:"",
-            "invition_status"=>isset($post["invition_status"])?$post["invition_status"]:"",
-        ];
-        $time=[
-          "start_time"=>isset($post["start_time"])?strtotime($post["start_time"]):"",
-          "end_time"=>  isset($post["end_time"])?strtotime($post["end_time"]):"",
-        ];
-            $new_time=[[],[]];
-        if(!empty($time["start_time"])){
-           $new_time[0]=["and",[">=","start_time",$time["start_time"]],["<=","start_time",$time["start_time"]+60*60*24]];
-        }
-        if(!empty($time["end_time"])){
-            $new_time[1]=["and",[">=","end_time",$time["end_time"]],["<=","end_time",$time["end_time"]+60*60*24]];
-        }
-
-        return [self::unset_arr($where),$new_time,$time];
+        $data["today"]=self::get_invite_num();
+        $data["yesterday"]=self::get_invite_num(false);
+        return $this->renderPartial("index",["data"=>$data,"post"=>$post]);
 
     }
 
-
-
-
-    private function  unset_arr($arr){
-        foreach($arr as $key=>$value){
-            if($value==""){
-                unset($arr[$key]);
+    /**
+     * @desc 获得查询条件
+     * @param $post
+     * @return string
+     */
+    public  function  get_value($post){
+        $sql_where="";
+        foreach($post as $key=>$value){
+            if($value!=""){
+                if($key=="user_name"){
+                    $sql_where.= " and  b.`e_user_name`= '{$value}'";
+                }
+                if($key=="user_by_name"){
+                    $sql_where.="  and  c.`e_user_name` ='{$value}'";
+                }
+                if($key=="invition_flag"){
+                    $sql_where.=" and  a.`invition_flag` = '{$value}'";
+                }
+                if($key=="invition_status"){
+                    $sql_where.="  and a.`invition_status` = '{$value}'";
+                }
+                if($key=="start_time"){
+                    $time_one=strtotime($value);
+                    $time_two=strtotime($value)+60*60*24;
+                    $sql_where.=" and  a.`start_time` >= '{$time_one}' and a.`start_time`<='{$time_two}' ";
+                }
+                if($key=="end_time"){
+                    $time_one=strtotime($value);
+                    $time_two=strtotime($value)+60*60*24;
+                    $sql_where.=" and  a.`end_time` >= '{$time_one}' and a.`end_time`<='{$time_two}' ";
+                }
             }
         }
-        return $arr;
+        $sql=$this->get_sql().$sql_where ."order by a.`start_time` desc";
+        return $sql;
+
+    }
+
+
+    private function  get_invite_num($now=true){
+        $inviteModel=new InviteModel();
+        $time=strtotime(date("Y-m-d",time()));
+        if(!$now){
+            $time= strtotime(date("Y-m-d",strtotime("-1 days")));
+
+        }
+
+        $time_now=$time+60*60*24;
+        $count=$inviteModel->select_count(["and",[">=","start_time",$time],["<=","start_time",$time_now]]);
+        return $count;
     }
 
 
 
-    private function  get_sql(){
 
-        $sql= "SELECT  DISTINCT a.`invition_id`,b.`e_user_name`,b.`e_user_wx_number`,c.`e_user_name` AS e_user_by_name,c.`e_user_wx_number` AS e_user_by_wx_number ,
-              a.`invition_code`,a.`invition_flag`,a.`invition_status`,a.`start_time`,a.`end_time` FROM hhs_inviteAS a LEFT JOIN hhs_users AS b ON a.`user_id`=b.`user_id`
-              LEFT JOIN hhs_users AS c ON a.`user_by_id`=c.`user_id` ";
-
-        return $sql;
-
-}
 }

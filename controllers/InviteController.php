@@ -67,4 +67,19 @@ class InviteController extends  CommonController
         $invition_code=$msg.$letter;
         return $invition_code;
     }
+
+    /**
+     * @desc 查看邀请码sql语句
+     * @return string
+     */
+    public  function  get_sql(){
+
+        $sql= "SELECT  DISTINCT a.`invition_id`,b.`e_user_name`, a.`user_id`,b.`e_user_wx_number`,c.`e_user_name` AS e_user_by_name,
+               a.`user_by_id`,c.`e_user_wx_number` AS e_user_by_wx_number ,a.`invition_code`,a.`invition_flag`,a.`invition_status`,
+               a.`start_time`,a.`end_time` FROM hhs_invite AS a LEFT JOIN hhs_users AS b ON a.`user_id`=b.`user_id` LEFT JOIN hhs_users
+               AS c ON a.`user_by_id`=c.`user_id` WHERE a.`invition_id`>0  ";
+
+        return $sql;
+    }
+
 }

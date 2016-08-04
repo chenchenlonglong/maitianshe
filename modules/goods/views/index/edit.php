@@ -7,7 +7,7 @@
 ?>
 <div class="pageContent">
     <h2 class="contentTitle">编辑渠道</h2>
-    <form   method="post" action="index.php?r=goods/index/edit" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+    <form   method="post" action="index.php?r=goods/index/edit" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
         <div class="pageFormContent" layoutH="100">
             <fieldset>
                 <dl class="nowrap">

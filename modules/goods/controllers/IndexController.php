@@ -59,7 +59,7 @@ class IndexController extends CommonController
             $result->reward=$post["reward"];
             $result->commision=$post["commision"];
             if($result->save()){
-                return  Functions::return_json(200,"修改成功");
+                return Functions::return_json(200,"修改成功，请手动关闭页面");
             }else{
               Functions::dwz_json(300,"修改失败");
             }

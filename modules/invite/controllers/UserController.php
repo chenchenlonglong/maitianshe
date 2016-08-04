@@ -21,11 +21,20 @@ class UserController extends  InviteController
      * @return string
      */
     public  function  actionIndex_temporary(){
-            $page= $this->get_page_value();
-            $invateModel= new InviteModel();
-            $data=$invateModel->getPage($invateModel->find(),$page[0],$page[1],"start_time DESC",["invition_flag"=>InviteModel::USER_TEMP]);
-            return $this->renderPartial("index",["data"=>$data]);
+        $page= $this->get_page_value();
+        $inviteModel= new InviteModel();
+        $sql=$this->get_sql()."and  a.`invition_flag`=".InviteModel::USER_TEMP;
+        $result=$inviteModel->findBySql($sql)->asArray()->all();
+        $data=$inviteModel->getPage_by_sql($result,$page[0],$page[1]);
+        $start=($page[0]-1)*$page[1];
+        $sql=$sql."  limit {$start},{$page[1]} ;";
+        $result=$inviteModel->findBySql($sql)->asArray()->all();
+        $data["data"]=$result;
+        return $this->renderPartial("index",["data"=>$data]);
     }
+
+
+
 
     public  function  actionGet_invite(){
         $num=Yii::$app->request->post("num","");

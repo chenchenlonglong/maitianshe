@@ -31,7 +31,7 @@ class InviteModel extends  BaseModel
      */
     public  function  select_count($where="",$andwhere="",$andFilerwhere=""){
 
-             $data= $this->find()->where($where);
+         $data= $this->find()->where($where);
 
          if($andwhere){
              $data=$data->andWhere($andwhere);

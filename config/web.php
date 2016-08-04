@@ -16,6 +16,7 @@ $config = [
         'invite' => ['class' => 'app\modules\invite\Invite'],
         'goods' => ['class' => 'app\modules\goods\Goods'],
         'user' => ['class' => 'app\modules\user\User'],
+        'task' => ['class' => 'app\modules\task\Task'],
 
     ],
     'components' => [

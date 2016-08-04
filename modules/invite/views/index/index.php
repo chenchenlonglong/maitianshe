@@ -15,16 +15,24 @@
             <table class="searchContent">
                 <tr>
                     <td>
-                        所属管理员(微信号): <input type="text" name="user_id" value="<?php echo isset($where[0]["user_id"])?$where[0]["user_id"]:"";?>">
+                        今日生成邀请码条数:<span style="color: red"><?php echo $data["today"];?></span> 条
                     </td>
                     <td>
-                        所属团长(微信号): <input type="text" name="user_by_id" value="<?php echo isset($where[0]["user_by_id"])?$where[0]["user_by_id"]:"";?>">
+                        昨日生成邀请码条数:<span style="color: red"><?php echo $data["yesterday"];?></span> 条
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        所属管理员: <input type="text" name="user_name" value="<?php echo  isset($post['user_name'])?$post["user_name"]:"";?>">
+                    </td>
+                    <td>
+                        所属团长: <input type="text" name="user_by_name" value="<?php echo  isset($post['user_by_name'])?$post["user_by_name"]:"";?>">
                     </td>
                     <td>
                         状态: <select name="invition_flag">
                             <option value="">请选择状态</option>
                             <?php foreach($data["invite_status"] as $key=>$value){?>
-                                <option <?php if(isset($where[0]["invition_flag"])){if($where[0]["invition_flag"]==$key){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
+                                <option  <?php if(isset($post["invition_flag"])){if($post["invition_flag"]==$key){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
                             <?php }?>
                         </select>
                     </td>
@@ -32,24 +40,24 @@
                         种类: <select name="invition_status">
                             <option value="">请选择种类</option>
                             <?php foreach($data["invite_status_group"] as $key=>$value){?>
-                                <option  <?php if(isset($where[0]["invition_status"])){if($where[0]["invition_status"]==$key){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
+                                <option  <?php if(isset($post["invition_status"])){if($post["invition_status"]==$key){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
                             <?php }?>
                         </select>
                     </td>
                     <td>
-                        生成时间：<input type="text"  name="start_time" value="<?php if($where[2]["start_time"]){ echo date("Y-m-d",$where[2]["start_time"]);}?>" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
+                        生成时间：<input type="text"  name="start_time" value="<?php echo  isset($post['start_time'])?$post["start_time"]:"";?>" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
 
                     </td>
                     <td>
-                        有效期：<input type="text"   name="end_time" value="<?php if($where[2]["end_time"]){ echo date("Y-m-d",$where[2]["end_time"]);}?>" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
+                        有效期：<input type="text"   name="end_time" value="<?php echo  isset($post['end_time'])?$post["end_time"]:"";?>" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
+                    </td>
+                    <td>
+                        <div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
                     </td>
                 </tr>
             </table>
-            <div class="subBar">
-                <ul>
-                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
-                </ul>
-            </div>
+
+
         </div>
     </form>
 </div>
@@ -59,26 +67,28 @@
             <thead style="text-align: center">
             <tr>
                 <th width="80">序号</th>
-                <th width="100">生成时间</th>
-                <th width="125">有效期</th>
                 <th width="125">邀请码</th>
+                <th width="80">所属管理员名称/id</th>
+                <th width="80">所属管理员微信号</th>
+                <th width="80">所属团长名称/id</th>
                 <th width="100">状态</th>
                 <th width="100">种类</th>
-                <th width="80">所属管理员</th>
-                <th width="80">所属团长</th>
+                <th width="100">生成时间</th>
+                <th width="125">有效期</th>
             </tr>
             </thead>
             <tbody>
             <?php foreach($data["data"] as $value){?>
                 <tr>
                     <td><?php echo $value["invition_id"];?></td>
-                    <td><?php echo date("Y-m-d",$value["start_time"]);?></td>
-                    <td><?php echo date("Y-m-d",$value["end_time"]);?></td>
-                    <td><?php echo $value["invition_code"];?></td>
+                    <td style="color: red"><?php echo $value["invition_code"];?></td>
+                    <td><?php echo $value["e_user_name"]."/".$value["user_id"]?></td>
+                    <td><?php echo $value["e_user_wx_number"];?></td>
+                    <td><?php echo $value["e_user_by_name"]."/".$value["user_by_id"];?></td>
                     <td><?php echo Yii::$app->params["invate_status_group"][$value["invition_status"]];?></td>
                     <td><?php echo Yii::$app->params["invate_type"][$value["invition_flag"]];?></td>
-                    <td><?php echo $value["user_id"];?></td>
-                    <td><?php echo $value["user_by_id"];?></td>
+                    <td><?php echo date("Y-m-d",$value["start_time"]);?></td>
+                    <td><?php echo date("Y-m-d",$value["end_time"]);?></td>
                 </tr>
             <?php }?>
             </tbody>
@@ -104,3 +114,4 @@
     </div>
 
 </div>
+

@@ -113,9 +113,9 @@ class Functions
      * @param string $callback
      * @param string $reload
      */
-    public static function return_json($code = 300, $message = '系统错误!',$result=array())
+    public static function return_json($code = 300, $message = '系统错误!',$result=array(),$navTabId="",$callbackType="")
     {
-        $array = ["statusCode" => $code, "message" => $message, "result"=>$result];
+        $array = ["statusCode" => $code, "message" => $message, "result"=>$result,"navTabId"=>$navTabId,"callbackType"=>$callbackType];
         return json_encode($array);
     }
 

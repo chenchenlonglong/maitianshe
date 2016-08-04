@@ -23,8 +23,14 @@ class AdminController extends InviteController
      */
     public  function actionIndex_temporary(){
         $page= $this->get_page_value();
-        $invateModel= new InviteModel();
-        $data=$invateModel->getPage($invateModel->find(),$page[0],$page[1],"start_time DESC",["invition_flag"=>InviteModel::ADMIN_TEMP]);
+        $inviteModel= new InviteModel();
+        $sql=$this->get_sql()."and  a.`invition_flag`=".InviteModel::ADMIN_TEMP;
+        $result=$inviteModel->findBySql($sql)->asArray()->all();
+        $data=$inviteModel->getPage_by_sql($result,$page[0],$page[1]);
+        $start=($page[0]-1)*$page[1];
+        $sql=$sql."  limit {$start},{$page[1]} ;";
+        $result=$inviteModel->findBySql($sql)->asArray()->all();
+        $data["data"]=$result;
         return $this->renderPartial("index",["data"=>$data]);
     }
 
@@ -34,6 +40,9 @@ class AdminController extends InviteController
      */
     public  function actionGet_invite(){
         $num=Yii::$app->request->post("num","");
+        if(empty($num)){
+            Functions::dwz_json(300,"生成数量为空");
+        }
         if(!preg_match("/^[0-9]*$/",$num)){
             Functions::dwz_json(300,"生成数量格式不正确");
         }
