@@ -24,8 +24,21 @@ class InviteModel extends  BaseModel
         return "{{hhs_invite}}";
     }
 
+    /**
+     * @desc 查询总数
+     * @param array $condition
+     * @return int|string
+     */
+    public  function  select_count($where="",$andwhere="",$andFilerwhere=""){
 
-    public  function  select_count($condition=[]){
-     return  $this->find()->where($condition)->asArray()->count();
+             $data= $this->find()->where($where);
+
+         if($andwhere){
+             $data=$data->andWhere($andwhere);
+         }
+        if($andFilerwhere){
+            $data=$data->andFilterWhere($andFilerwhere);
+        }
+        return $data->asArray()->count();
     }
 }

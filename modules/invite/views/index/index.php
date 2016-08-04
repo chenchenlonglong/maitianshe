@@ -7,7 +7,7 @@
 ?>
 <form id="pagerForm" method="post" action="index.php?r=invite/index/index">
     <input type="hidden" name="pageNum" value="<?php isset($data['page'])?$data["page"]:0;?>" />
-    <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
+    <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:30;?>" />
 </form>
 <div class="pageHeader">
     <form   onsubmit="return navTabSearch(this);" action="index.php?r=invite/index/index" method="post" class="pageForm required-validate">
@@ -15,17 +15,16 @@
             <table class="searchContent">
                 <tr>
                     <td>
-                        <?php  var_dump($where[0]);?>
-                        所属管理员: <input type="text" name="user_id" value="<?php echo isset($where[0]["user_id"])?$where[0]["user_id"]:"";?>">
+                        所属管理员(微信号): <input type="text" name="user_id" value="<?php echo isset($where[0]["user_id"])?$where[0]["user_id"]:"";?>">
                     </td>
                     <td>
-                        所属团长: <input type="text" name="user_by_id" value="<?php echo isset($where[0]["user_by_id"])?$where[0]["user_by_id"]:"";?>">
+                        所属团长(微信号): <input type="text" name="user_by_id" value="<?php echo isset($where[0]["user_by_id"])?$where[0]["user_by_id"]:"";?>">
                     </td>
                     <td>
                         状态: <select name="invition_flag">
                             <option value="">请选择状态</option>
                             <?php foreach($data["invite_status"] as $key=>$value){?>
-                                <option  <?php if(isset($where[0]["invition_flag"])){if($where[0]["invition_flag"]==$value){echo 'selected="selected"';}}?>   value="<?php echo $key ?>"><?php echo $value?></option>
+                                <option <?php if(isset($where[0]["invition_flag"])){if($where[0]["invition_flag"]==$key){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
                             <?php }?>
                         </select>
                     </td>
@@ -33,16 +32,16 @@
                         种类: <select name="invition_status">
                             <option value="">请选择种类</option>
                             <?php foreach($data["invite_status_group"] as $key=>$value){?>
-                                <option  <?php if(isset($where[0]["invition_status"])){if($where[0]["invition_status"]==$value){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
+                                <option  <?php if(isset($where[0]["invition_status"])){if($where[0]["invition_status"]==$key){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
                             <?php }?>
                         </select>
                     </td>
                     <td>
-                        生成时间：<input type="text"  name="start_time" value="" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
+                        生成时间：<input type="text"  name="start_time" value="<?php if($where[2]["start_time"]){ echo date("Y-m-d",$where[2]["start_time"]);}?>" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
 
                     </td>
                     <td>
-                        有效期：<input type="text"   name="end_time" value="" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
+                        有效期：<input type="text"   name="end_time" value="<?php if($where[2]["end_time"]){ echo date("Y-m-d",$where[2]["end_time"]);}?>" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
                     </td>
                 </tr>
             </table>
