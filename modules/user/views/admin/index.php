@@ -11,25 +11,7 @@
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
 </form>
 <div class="pageHeader">
-    <form   onsubmit="return navTabSearch(this);" action="index.php?r=invate/admin/get_invate" method="post" class="pageForm required-validate">
-        <div class="searchBar">
-            <table class="searchContent">
-                <tr>
-                    <td>
-                        团长临时邀请码生成数量：
-                        <input type="text" name="num" />
-                    </td>
-                    <td>
-                        <div class="buttonActive">
-                            <div class="buttonContent">
-                                <button type="submit">生成</button>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </form>
+
 </div>
 <div class="pageContent trainListPage">
     <div id="w_list_print">

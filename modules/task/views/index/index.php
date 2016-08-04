@@ -18,7 +18,7 @@
 </div>
 <div class="pageContent trainListPage">
     <div id="w_list_print">
-        <table class="list" width="100%" targetType="navTab" layoutH="88" style="text-align: center">
+        <table class="list" width="100%" targetType="navTab" layoutH="68" style="text-align: center">
             <thead style="text-align: center">
             <tr>
                 <th width="80">序号</th>
