@@ -39,6 +39,17 @@
             </tr>
             </thead>
             <tbody>
+            <?php  foreach($data["data"] as $value){?>
+                <tr>
+                    <td><?php echo $value["id"]?></td>
+                    <td><?php echo $value["user_name"]?></td>
+                    <td><?php echo $value["wx_name"]?></td>
+                    <td><?php echo $value["amount"]?></td>
+                    <td><?php echo Yii::$app->params["audit_status"][$value["flag"]];?></td>
+                    <td><?php echo $value["reason"]?></td>
+                    <td><?php echo $value["reason"]?></td>
+                </tr>
+            <?php }?>
             </tbody>
         </table>
     </div>

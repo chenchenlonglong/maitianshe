@@ -30,7 +30,7 @@ class ReduceController extends CommonController
 
 
     private function  sql(){
-        return "SELECT DISTINCT a.`id`, b.`user_name`,a.`flag`,a.`reason`,a.`amount`
+        return "SELECT DISTINCT a.`id`, b.`e_user_name` as user_name,b.`e_user_wx_number` as wx_name,a.`flag`,a.`reason`,a.`amount`
                 FROM hhs_reduce_money AS a LEFT JOIN hhs_users AS b ON a.`user_id`=b.`user_id`;";
     }
 
