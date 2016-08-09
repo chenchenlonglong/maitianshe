@@ -8,6 +8,7 @@
 namespace app\controllers;
 
 use Yii;
+
 class CommonController extends   BaseController
 {
     /**

@@ -47,7 +47,7 @@ class IndexController extends CommonController
             }
         }
        if($result->save()){
-            return Functions::return_json(200,"修改成功，请手动关闭页面","","index_id_index","closeCurrent");
+            return Functions::return_json(200,"修改成功","","index_id_index","closeCurrent");
        }else{
            Functions::dwz_json(300,"修改失败，请重试","index_id_index","closeCurrent");
        }

@@ -23,6 +23,7 @@
                         <?php }?>
                     </select>
                 </p>
+
                 <p>
                     <label>任务描述：</label>
                     <input name="commission_describe" type="text" size="30" value="<?php echo $data["commission_describe"];?>"/>
