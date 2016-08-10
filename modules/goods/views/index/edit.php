@@ -34,10 +34,10 @@
                 <dl class="nowrap">
                     <dt>任务等级</dt>
                     <dd><select name="task_level">
-                            <?php foreach($task as $key=> $value){ ?>
-                                <option   <?php  if($data["task_level"]==$key){
+                            <?php foreach($task as $value){ ?>
+                                <option   <?php  if($data["task_level"]==$value["task_level"]){
                                     echo 'selected="selected"';
-                                }?> value="<?php echo $key?>"><?php echo $value?></option>
+                                }?> value="<?php echo $value["task_level"]?>"><?php echo $value["task_name"]?></option>
                             <?php }?>
                         </select></dd>
                 </dl>

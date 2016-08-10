@@ -10,6 +10,7 @@ namespace app\modules\goods\controllers;
 use app\common\Task;
 use app\controllers\CommonController;
 use app\models\GoodsModel;
+use app\models\InviteModel;
 use Yii;
 use Functions;
 
@@ -68,7 +69,9 @@ class IndexController extends CommonController
             $goods_id=Yii::$app->request->get("goods_id");
 
             $goods=$goods_model->find()->where(["goods_id"=>$goods_id])->asArray()->one();
-            $task=Task::get_task();
+
+            $inviteModel= new InviteModel();
+            $task=$inviteModel->find()->select(["id","task_level","task_name"])->asArray()->all();
             return $this->renderPartial("edit",["data"=>$goods,"task"=>$task]);
         }
 
