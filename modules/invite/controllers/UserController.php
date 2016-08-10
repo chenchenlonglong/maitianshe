@@ -34,8 +34,10 @@ class UserController extends  InviteController
     }
 
 
-
-
+    /**
+     * @desc 生成团长临时邀请码
+     * @return string
+     */
     public  function  actionGet_invite(){
         $num=Yii::$app->request->post("num","");
         $admin_id=Yii::$app->request->post("admin_id","");
