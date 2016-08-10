@@ -28,7 +28,7 @@ use yii\helpers\Url;
 </div>
 <div class="pageContent trainListPage">
     <div id="w_list_print">
-        <table class="list" width="100%" targetType="navTab" layoutH="70" style="text-align: center">
+        <table class="list" width="100%" targetType="navTab" layoutH="62" style="text-align: center">
             <thead style="text-align: center">
             <tr>
                 <th width="80">编号</th>

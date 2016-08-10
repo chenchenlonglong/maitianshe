@@ -47,7 +47,7 @@
                     <td><?php  echo $value["e_alipay_number"];?></td>
                     <td><?php  echo $value["e_active_time"];?></td>
                     <td><a href="/index.php?r=sys/product/edit_show&app_id=<?php echo $value["user_id"]?>"  max="true"  target="navTab" title="用户详情" >
-                            <span>详情</span>
+                            <span>生成邀请码</span>
                         </a></td>
                 </tr>
             <?php }?>
