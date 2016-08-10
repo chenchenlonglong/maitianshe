@@ -1,20 +1,50 @@
 <?php
 /**
  * author: chenlong
- * Date: 2016/8/8
- * Time: 14:35
+ * Date: 2016/8/10
+ * Time: 17:04
  */
 ?>
-<form id="pagerForm" method="post" action="index.php?r=audit/reduce/index">
+<form id="pagerForm" method="post" action="index.php?r=audit/reduce/reduce_history">
     <input type="hidden" name="pageNum" value="<?php isset($data['page'])?$data["page"]:0;?>" />
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
 </form>
 <div class="pageHeader">
+    <form   onsubmit="return navTabSearch(this);" action="index.php?r=audit/reduce/reduce_history" method="post" class="pageForm required-validate">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        用户名称：<input type="text" name="user_name" value="" />
+                    </td>
+                    <td>
+                        提现状态：<select name="flag">
+                                <?php  foreach($data["audit_status"] as $key=>$value){?>
+                            <option   value="<?php echo $key?>"><?php echo $value?></option>
+                            <?php }?>
+                        </select>
+                    </td>
+                    <td>
+                        申请时间：<input type="text"  name="start_time"
+                                    value=""
+                                    class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
+                    </td>
+                    <td>
+                        处理时间：<input type="text"  name="audit_time"
+                                    value=""
+                                    class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
+                    </td>
+
+                    <td><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
+                </tr>
+            </table>
+        </div>
+    </form>
 </div>
 
 <div class="pageContent trainListPage">
     <div id="w_list_print">
-        <table class="list" width="100%" targetType="navTab" layoutH=38 style="text-align: center">
+        <table class="list" width="100%" targetType="navTab" layoutH="62" style="text-align: center">
             <thead style="text-align: center">
             <tr>
                 <th width="80">序号</th>
@@ -26,7 +56,6 @@
                 <th width="100">申请时间</th>
                 <th width="100">处理时间</th>
                 <th width="100">处理用户</th>
-                <th width="100">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -41,8 +70,6 @@
                     <td><?php echo date("Y-m-d",$value["time"]);?></td>
                     <td><?php echo empty($value["audit_time"])?"":date("Y-m-d",$value["audit_time"]);?></td>
                     <td><?php echo $value["audit_name"];?></td>
-                    <td> <a  href="/index.php?r=audit/reduce/reduce_show&user_id=<?php echo $value["user_id"]?>&id=<?php echo $value["id"];?>"  target="dialog" rel="reduce_id_index_reduce" title="提现审批" >
-                            <span>提现</span></a></td>
                 </tr>
             <?php }?>
             </tbody>
@@ -68,3 +95,4 @@
     </div>
 
 </div>
+
