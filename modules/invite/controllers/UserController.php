@@ -76,4 +76,6 @@ class UserController extends  InviteController
             Functions::exit_json(300,"邀请码生成失败");
         }
     }
+
+
 }

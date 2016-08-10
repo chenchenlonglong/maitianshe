@@ -18,7 +18,7 @@
         <table class="list" width="100%" targetType="navTab" layoutH="62" style="text-align: center">
             <thead style="text-align: center">
             <tr>
-                <th width="80">序号</th>
+                <th width="80">用户id</th>
                 <th width="80">羊皮卷显示姓名</th>
                 <th width="80">微信号</th>
                 <th width="80">年龄阶段</th>
@@ -46,7 +46,7 @@
                     <td><?php  echo $value["e_super_medal_number"];?></td>
                     <td><?php  echo $value["e_alipay_number"];?></td>
                     <td><?php  echo $value["e_active_time"];?></td>
-                    <td><a href="/index.php?r=sys/product/edit_show&app_id=<?php echo $value["user_id"]?>"  max="true"  target="navTab" title="用户详情" >
+                    <td><a href="/index.php?r=user/admin/edit_show&user_id=<?php echo $value["user_id"]?>" rel="admin_id_index" target="dialog" title="用户详情" >
                             <span>生成邀请码</span>
                         </a></td>
                 </tr>
