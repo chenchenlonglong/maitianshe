@@ -11,54 +11,54 @@
 </form>
 <div class="pageHeader">
     <form   onsubmit="return navTabSearch(this);" action="index.php?r=invite/index/index" method="post" class="pageForm required-validate">
-        <div class="searchBar">
-            <table class="searchContent">
-                <tr>
-                    <td>
-                        今日生成邀请码条数:<span style="color: red"><?php echo $data["today"];?></span> 条
-                    </td>
-                    <td>
-                        昨日生成邀请码条数:<span style="color: red"><?php echo $data["yesterday"];?></span> 条
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        所属管理员: <input type="text" name="user_name" value="<?php echo  isset($post['user_name'])?$post["user_name"]:"";?>">
-                    </td>
-                    <td>
-                        所属团长: <input type="text" name="user_by_name" value="<?php echo  isset($post['user_by_name'])?$post["user_by_name"]:"";?>">
-                    </td>
-                    <td>
-                        状态: <select name="invition_flag">
-                            <option value="">请选择状态</option>
-                            <?php foreach($data["invite_status"] as $key=>$value){?>
-                                <option  <?php if(isset($post["invition_flag"])){if($post["invition_flag"]==$key){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
-                            <?php }?>
-                        </select>
-                    </td>
-                    <td>
-                        种类: <select name="invition_status">
-                            <option value="">请选择种类</option>
-                            <?php foreach($data["invite_status_group"] as $key=>$value){?>
-                                <option  <?php if(isset($post["invition_status"])){if($post["invition_status"]==$key){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
-                            <?php }?>
-                        </select>
-                    </td>
-                    <td>
-                        生成时间：<input type="text"  name="start_time" value="<?php echo  isset($post['start_time'])?$post["start_time"]:"";?>" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
+            <div class="searchBar">
+                <table class="searchContent">
+                    <tr>
+                        <td>
+                            今日生成邀请码条数:<span style="color: red"><?php echo $data["today"];?></span> 条
+                        </td>
+                        <td>
+                            昨日生成邀请码条数:<span style="color: red"><?php echo $data["yesterday"];?></span> 条
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            所属管理员: <input type="text" name="user_name" value="<?php echo  isset($post['user_name'])?$post["user_name"]:"";?>">
+                        </td>
+                        <td>
+                            所属团长: <input type="text" name="user_by_name" value="<?php echo  isset($post['user_by_name'])?$post["user_by_name"]:"";?>">
+                        </td>
+                        <td>
+                            状态: <select name="invition_flag">
+                                <option value="">请选择状态</option>
+                                <?php foreach($data["invite_status"] as $key=>$value){?>
+                                    <option  <?php if(isset($post["invition_flag"])){if($post["invition_flag"]==$key){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
+                                <?php }?>
+                            </select>
+                        </td>
+                        <td>
+                            种类: <select name="invition_status">
+                                <option value="">请选择种类</option>
+                                <?php foreach($data["invite_status_group"] as $key=>$value){?>
+                                    <option  <?php if(isset($post["invition_status"])){if($post["invition_status"]==$key){echo 'selected="selected"';}}?> value="<?php echo $key ?>"><?php echo $value?></option>
+                                <?php }?>
+                            </select>
+                        </td>
+                        <td>
+                            生成时间：<input type="text"  name="start_time" value="<?php echo  isset($post['start_time'])?$post["start_time"]:"";?>" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
 
-                    </td>
-                    <td>
-                        有效期：<input type="text"   name="end_time" value="<?php echo  isset($post['end_time'])?$post["end_time"]:"";?>" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
-                    </td>
-                    <td>
-                        <div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
-                    </td>
-                </tr>
-            </table>
+                        </td>
+                        <td>
+                            有效期：<input type="text"   name="end_time" value="<?php echo  isset($post['end_time'])?$post["end_time"]:"";?>" class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
+                        </td>
+                        <td>
+                            <div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+                        </td>
+                    </tr>
+                </table>
 
 
-        </div>
+            </div>
     </form>
 </div>
 <div class="pageContent trainListPage">

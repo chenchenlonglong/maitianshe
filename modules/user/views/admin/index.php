@@ -6,12 +6,23 @@
  * Time: 23:13
  */
 ?>
-<form id="pagerForm" method="post" action="index.php?r=invate/admin/index_temporary">
+<form id="pagerForm" method="post" action="index.php?r=user/admin/index">
     <input type="hidden" name="pageNum" value="<?php isset($data['page'])?$data["page"]:0;?>" />
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
 </form>
 <div class="pageHeader">
-
+    <form   onsubmit="return navTabSearch(this);" action="index.php?r=user/admin/index" method="post" class="pageForm required-validate">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        管理员姓名：<input type="text" name="admin_name" value="<?php  echo isset($data['admin_name'])?$data['admin_name']:"";?>" />
+                    </td>
+                    <td><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
+                </tr>
+            </table>
+        </div>
+    </form>
 </div>
 <div class="pageContent trainListPage">
     <div id="w_list_print">
@@ -19,7 +30,7 @@
             <thead style="text-align: center">
             <tr>
                 <th width="80">用户id</th>
-                <th width="80">羊皮卷显示姓名</th>
+                <th width="80">管理员名称</th>
                 <th width="80">微信号</th>
                 <th width="80">年龄阶段</th>
                 <th width="80">注册电话号</th>
@@ -46,9 +57,10 @@
                     <td><?php  echo $value["e_super_medal_number"];?></td>
                     <td><?php  echo $value["e_alipay_number"];?></td>
                     <td><?php  echo $value["e_active_time"];?></td>
-                    <td><a href="/index.php?r=user/admin/edit_show&user_id=<?php echo $value["user_id"]?>" rel="admin_id_index" target="dialog" title="用户详情" >
+                    <td><a href="/index.php?r=user/admin/create_invite_show&user_id=<?php echo $value["user_id"]?>&user_name=<?php echo $value["e_user_name"];?>" rel="admin_id_index" target="dialog" title="生成邀请码" >
                             <span>生成邀请码</span>
-                        </a></td>
+                        </a>
+                    </td>
                 </tr>
             <?php }?>
             </tbody>

@@ -8,7 +8,7 @@ use yii\helpers\Url;
 ?>
 <form id="pagerForm" method="post" action="index.php?r=invate/index/index">
     <input type="hidden" name="pageNum" value="<?php isset($data['page'])?$data["page"]:0;?>" />
-    <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
+    <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:30;?>" />
 </form>
 <div class="pageHeader">
     <form   onsubmit="return navTabSearch(this);" action="index.php?r=goods/index/index" method="post" class="pageForm required-validate">
@@ -25,7 +25,6 @@ use yii\helpers\Url;
     </form>
 </div>
 
-</div>
 <div class="pageContent trainListPage">
     <div id="w_list_print">
         <table class="list" width="100%" targetType="navTab" layoutH="62" style="text-align: center">
@@ -76,6 +75,7 @@ use yii\helpers\Url;
         <div class="pages">
             <span>显示</span>
             <select name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option value="30"<?php if(isset($data['page_num']) && $data['page_num'] == 30){echo ' selected="selected"';}else{}?>>30</option>
                 <option value="50"<?php if(isset($data['page_num']) && $data['page_num'] == 50){echo ' selected="selected"';}else{}?>>50</option>
                 <option value="100"<?php if(isset($data['page_num']) && $data['page_num'] == 100){echo ' selected="selected"';}else{}?>>100</option>
                 <option value="200"<?php if(isset($data['page_num']) && $data['page_num'] == 200){echo ' selected="selected"';}else{}?>>200</option>

@@ -18,13 +18,20 @@ class AdminController extends  CommonController
         $page=$this->get_page_value();
         $userModel=new UserModel();
         //管理员标识
-        $data=   $userModel->getPage($userModel->find(),$page[0],$page[1],"e_active_time",["e_user_level"=>3]);
+        $admin_name=Yii::$app->request->post("admin_name","");
+        if($admin_name){
+            $data=   $userModel->getPage($userModel->find(),$page[0],$page[1],"e_active_time",["e_user_level"=>3],["e_user_name"=>$admin_name]);
+        }else{
+            $data=   $userModel->getPage($userModel->find(),$page[0],$page[1],"e_active_time",["e_user_level"=>3]);
+        }
+
         return $this->renderPartial("index",["data"=>$data]);
     }
 
 
     public  function  actionCreate_invite_show(){
         $user_id=Yii::$app->request->get("user_id","");
-
+        $user_name=Yii::$app->request->get("user_name","");
+        return $this->renderPartial("invite_show",["user_id"=>$user_id,"user_name"=>$user_name]);
     }
 }
