@@ -30,7 +30,7 @@
             <thead style="text-align: center">
             <tr>
                 <th width="80">用户id</th>
-                <th width="80">管理员名称</th>
+                <th width="80">管理员姓名</th>
                 <th width="80">微信号</th>
                 <th width="80">年龄阶段</th>
                 <th width="80">注册电话号</th>
@@ -49,7 +49,7 @@
                     <td><?php  echo $value["user_id"];?></td>
                     <td><?php  echo $value["e_user_name"];?></td>
                     <td><?php  echo $value["e_user_wx_number"];?></td>
-                    <td><?php  echo $value["e_age_group"];?></td>
+                    <td><?php  echo Yii::$app->params["age_group"][$value["e_age_group"]];?></td>
                     <td><?php  echo $value["e_register_phone"];?></td>
                     <td><?php  echo $value["e_register_email"];?></td>
                     <td><?php  echo $value["e_admin_team_name"];?></td>
@@ -57,9 +57,14 @@
                     <td><?php  echo $value["e_super_medal_number"];?></td>
                     <td><?php  echo $value["e_alipay_number"];?></td>
                     <td><?php  echo $value["e_active_time"];?></td>
-                    <td><a href="/index.php?r=user/admin/create_invite_show&user_id=<?php echo $value["user_id"]?>&user_name=<?php echo $value["e_user_name"];?>" rel="admin_id_index" target="dialog" title="生成邀请码" >
+                    <td>
+                        <a href="/index.php?r=user/admin/edit&user_id=<?php echo $value["user_id"]?>"  max="true"  target="navTab" title="管理员修改" >
+                            <span>修改</span>
+                        </a>/
+                        <a href="/index.php?r=user/admin/create_invite_show&user_id=<?php echo $value["user_id"]?>&user_name=<?php echo $value["e_user_name"];?>" rel="admin_id_index" target="dialog" title="生成邀请码" >
                             <span>生成邀请码</span>
                         </a>
+
                     </td>
                 </tr>
             <?php }?>

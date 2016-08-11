@@ -42,7 +42,6 @@ use yii\helpers\Url;
                 <th width="80">热销</th>
                 <th width="80">上架</th>
                 <th width="80">推荐排序</th>
-                <th width="80">库存</th>
                 <th width="80">操作</th>
             </tr>
             </thead>
@@ -60,7 +59,6 @@ use yii\helpers\Url;
                     <td><?php echo $value["is_new"];?></td>
                     <td><?php echo $value["is_hot"];?></td>
                     <td><?php echo $value["is_on_sale"];?></td>
-                    <td><?php echo $value["sort_order"];?></td>
                     <td><?php echo $value["goods_number"];?></td>
                     <td>
                         <a href="/index.php?r=goods/index/edit&goods_id=<?php echo $value["goods_id"]?>"  max="true"  target="navTab" title="编辑" >编辑</a>
