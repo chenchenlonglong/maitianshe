@@ -36,7 +36,6 @@ class AdminController extends  CommonController
         $user_id=Yii::$app->request->get("user_id","");
         $userModel= new UserModel();
         if($user_id){
-
             $select=["user_id","e_user_name","e_user_wx_number","e_age_group","e_admin_wx_code_img","e_admin_wx_code_img_url","e_admin_team_name","e_register_phone",
                       "e_register_email","e_alipay_number","e_beneficiary_name","e_admin_team_name"];
             $data=$userModel->find()->select($select)->where(["user_id"=>$user_id])->asArray()->one();
@@ -66,7 +65,7 @@ class AdminController extends  CommonController
                 $save_arr["e_admin_wx_code_img"]=$img_name;
                 $save_arr["e_admin_wx_code_img_url"]=$img_url;
             }else{
-                Functions::exit_json(300,"文件格式不正确");
+                return    Functions::return_json(300,"文件格式不正确");
             }
         }
         $save_result=$userModel->updateAll($save_arr,["user_id"=>$user_id]);
@@ -76,7 +75,7 @@ class AdminController extends  CommonController
         return Functions::return_json(300,"修改失败，请重试");
 
     }
-    
+
 
     public  function  actionCreate_invite_show(){
         $user_id=Yii::$app->request->get("user_id","");
