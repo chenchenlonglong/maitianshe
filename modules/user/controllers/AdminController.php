@@ -44,7 +44,6 @@ class AdminController extends  CommonController
         }
         $post=Yii::$app->request->post();
         //二维码上传
-        file_put_contents("admin.txt",json_encode($post,true));
         $user_id=$post["user_id"];
         $save_arr=[
             "user_id"=>$user_id,
