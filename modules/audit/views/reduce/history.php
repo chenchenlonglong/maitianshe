@@ -15,23 +15,25 @@
             <table class="searchContent">
                 <tr>
                     <td>
-                        用户名称：<input type="text" name="user_name" value="" />
+                        用户名称：<input type="text" name="user_name" value="<?php echo isset($post["user_name"])?$post["user_name"]:"";?>" />
                     </td>
                     <td>
                         提现状态：<select name="flag">
-                                <?php  foreach($data["audit_status"] as $key=>$value){?>
-                            <option   value="<?php echo $key?>"><?php echo $value?></option>
+                            <option value="">全部状态</option>
+                             <?php  foreach($data["audit_status"] as $key=>$value){?>
+                            <option  <?php  if(isset($post["flag"])){if ($post["flag"]==$key){ echo "selected='selected'";}}?>    value="<?php echo $key?>"><?php echo $value?></option>
                             <?php }?>
                         </select>
                     </td>
                     <td>
+
                         申请时间：<input type="text"  name="start_time"
-                                    value=""
+                                    value="<?php if(!empty($post["start_time"])){echo $post["start_time"]; }?>"
                                     class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
                     </td>
                     <td>
                         处理时间：<input type="text"  name="audit_time"
-                                    value=""
+                                    value="<?php if(!empty($post["audit_time"])){echo $post["audit_time"]; }?>"
                                     class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
                     </td>
 

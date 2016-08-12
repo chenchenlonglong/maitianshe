@@ -24,8 +24,6 @@
                 <th width="125">提现状态</th>
                 <th width="100">提现原因</th>
                 <th width="100">申请时间</th>
-                <th width="100">处理时间</th>
-                <th width="100">处理用户</th>
                 <th width="100">操作</th>
             </tr>
             </thead>
@@ -39,8 +37,6 @@
                     <td><?php echo Yii::$app->params["audit_status"][$value["flag"]];?></td>
                     <td><?php echo $value["reason"]?></td>
                     <td><?php echo date("Y-m-d",$value["time"]);?></td>
-                    <td><?php echo empty($value["audit_time"])?"":date("Y-m-d",$value["audit_time"]);?></td>
-                    <td><?php echo $value["audit_name"];?></td>
                     <td> <a  href="/index.php?r=audit/reduce/reduce_show&user_id=<?php echo $value["user_id"]?>&id=<?php echo $value["id"];?>"  target="dialog" rel="reduce_id_index_reduce" title="提现审批" >
                             <span>提现</span></a></td>
                 </tr>

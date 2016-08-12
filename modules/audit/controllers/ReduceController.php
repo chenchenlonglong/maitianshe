@@ -48,7 +48,26 @@ class ReduceController extends CommonController
         $page=$this->get_page_value();
         $reduceModel= new ReduceModel();
         $post=Yii::$app->request->post();
-        $sql=self::sql()." where a.`flag`!=3003";
+        $sql=self::sql();
+        $sql=$sql." where a.`flag`!=3003";
+        if($post){
+            if($post["user_name"]){
+                $sql=$sql." and  b.`e_user_name`='{$post["user_name"]}'";
+            }
+            if($post["flag"]){
+                $sql=$sql." and  a.`flag`='{$post["flag"]}'";
+            }
+            if($post["start_time"]){
+                $start_time=strtotime($post["start_time"]);
+                $end_time=$start_time+60*60*24;
+                $sql=$sql." and  a.`time`>='{$start_time}' and a.`time`<'{$end_time}'";
+            }
+            if($post["audit_time"]){
+                $start_time=strtotime($post["audit_time"]);
+                $end_time=$start_time+60*60*24;
+                $sql=$sql." and  a.`audit_time`>='{$start_time}' and a.`audit_time`<'{$end_time}'";
+            }
+        }
         $result=$reduceModel->findBySql($sql)->asArray()->all();
         $data=$reduceModel->getPage_by_sql($result,$page[0],$page[1]);
         $start=($page[0]-1)*$page[1];
@@ -58,14 +77,8 @@ class ReduceController extends CommonController
         $reduce_status=Yii::$app->params["audit_status"];
         unset($reduce_status["3003"]);
         $data["audit_status"]=$reduce_status;
-        return    $this->renderPartial("history",["data"=>$data]);
+        return    $this->renderPartial("history",["data"=>$data,"post"=>$post]);
     }
-
-
-
-
-
-
 
 
 
@@ -108,7 +121,8 @@ class ReduceController extends CommonController
             "trade_no"=>$data["trade_no"]
         ];
         $curl= new Curl();
-       $reduce_result=$curl->setOption(CURLOPT_POSTFIELDS, http_build_query($message))->post(yii::$app->params['reduce_url']);
+       $reduce_result_json=$curl->setOption(CURLOPT_POSTFIELDS, http_build_query($message))->post(yii::$app->params['reduce_url']);
+        $reduce_result=json_decode($reduce_result_json,true);
         if($reduce_result["code"]==200){
           $reduceModel->updateAll(["flag"=>3004,"audit_time"=>time(),"audit_name"=>Tools::get_user_name()],["id"=>$id]);
           return Functions::return_json(200,"提现成功","","reduce_id_index","closeCurrent");
