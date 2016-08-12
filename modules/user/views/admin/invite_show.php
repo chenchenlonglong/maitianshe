@@ -18,7 +18,7 @@
 
                 <p>
                     <label>生成团长邀请码数量：</label>
-                    <input name="num" type="text" size="30" value="" class="required"/>
+                    <input name="num" type="text" size="30" value="" class="requi   red"/>
                 </p>
             </div>
 
