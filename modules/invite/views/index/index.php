@@ -68,9 +68,9 @@
             <tr>
                 <th width="80">序号</th>
                 <th width="125">邀请码</th>
-                <th width="80">所属管理员名称/id</th>
+                <th width="80">所属管理员名称</th>
                 <th width="80">所属管理员微信号</th>
-                <th width="80">所属团长名称/id</th>
+                <th width="80">所属团长名称</th>
                 <th width="100">状态</th>
                 <th width="100">种类</th>
                 <th width="100">生成时间</th>
@@ -82,9 +82,9 @@
                 <tr>
                     <td><?php echo $value["invition_id"];?></td>
                     <td style="color: red"><?php echo $value["invition_code"];?></td>
-                    <td><?php echo $value["e_user_name"]."/".$value["user_id"]?></td>
+                    <td><?php echo $value["e_user_name"];?></td>
                     <td><?php echo $value["e_user_wx_number"];?></td>
-                    <td><?php echo $value["e_user_by_name"]."/".$value["user_by_id"];?></td>
+                    <td><?php echo $value["e_user_by_name"];?></td>
                     <td><?php echo Yii::$app->params["invate_status_group"][$value["invition_status"]];?></td>
                     <td><?php echo Yii::$app->params["invate_type"][$value["invition_flag"]];?></td>
                     <td><?php echo date("Y-m-d",$value["start_time"]);?></td>
