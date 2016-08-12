@@ -43,6 +43,7 @@
                 <th width="80">所属管理员名称</th>
                 <th width="80">所属管理员微信号</th>
                 <th width="80">所属团长名称</th>
+                <th width="80">所属团长微信号</th>
                 <th width="100">状态</th>
                 <th width="100">种类</th>
                 <th width="100">生成时间</th>
@@ -56,6 +57,7 @@
                     <td style="color: red"><?php echo $value["invition_code"];?></td>
                     <td><?php echo $value["e_user_name"];?></td>
                     <td><?php echo $value["e_user_wx_number"];?></td>
+                    <td><?php echo $value["e_user_by_name"];?></td>
                     <td><?php echo $value["e_user_by_name"];?></td>
                     <td><?php echo Yii::$app->params["invate_status_group"][$value["invition_status"]];?></td>
                     <td><?php echo Yii::$app->params["invate_type"][$value["invition_flag"]];?></td>
