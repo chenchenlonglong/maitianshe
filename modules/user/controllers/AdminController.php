@@ -70,7 +70,6 @@ class AdminController extends  CommonController
             "e_beneficiary_name"=>$post["e_beneficiary_name"]//支付宝收款账户
         ];
         $qr_code =UploadedFile::getInstance($userModel, "e_admin_wx_code_img");
-        file_put_contents("text.txt",$qr_code->type,FILE_APPEND);
         if($qr_code){
             if(in_array($qr_code->type,Yii::$app->params["image_allow"])){
                 $img_url=Qiniu::qiniu_upload($qr_code->tempName,Yii::$app->params["qiniu_params"]["qr_code_path"]);
