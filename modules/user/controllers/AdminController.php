@@ -71,14 +71,14 @@ class AdminController extends  CommonController
         ];
         $qr_code =UploadedFile::getInstance($userModel, "e_admin_wx_code_img");
         if($qr_code){
-            if(in_array($qr_code->type,Yii::$app->params["image_allow"])){
-                $img_url=Qiniu::qiniu_upload($qr_code->tempName,Yii::$app->params["qiniu_params"]["qr_code_path"]);
-                $img_name=$qr_code->name;
-                $save_arr["e_admin_wx_code_img"]=$img_name;
-                $save_arr["e_admin_wx_code_img_url"]=$img_url;
-            }else{
+            if(!in_array($qr_code->type,Yii::$app->params["image_allow"])){
                 return    Functions::return_json(300,"文件格式不正确");
             }
+
+            $img_url=Qiniu::qiniu_upload($qr_code->tempName,Yii::$app->params["qiniu_params"]["qr_code_path"]);
+            $img_name=$qr_code->name;
+            $save_arr["e_admin_wx_code_img"]=$img_name;
+            $save_arr["e_admin_wx_code_img_url"]=$img_url;
         }
         $save_result=$userModel->updateAll($save_arr,["user_id"=>$user_id]);
         if($save_result>0){

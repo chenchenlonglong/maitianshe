@@ -26,7 +26,7 @@
                         今日注册人数为:<span style="color: red; margin-left: 10px;"><?php echo $data["today"];?>人</span>
                     </td>
                     <td >
-                        管理员总人数为:<span style="color: red; margin-left: 10px;"><?php echo $data['total'];?>人</span>
+                        管理员总人数为:<span style="color: red; margin-left: 10px;"><?php echo isset($data['total'])?$data["total"]:0;?>人</span>
                     </td>
                 </tr>
             </table>

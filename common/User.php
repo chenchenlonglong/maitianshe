@@ -39,7 +39,7 @@ class User
         $count= $userModel->find()->where(["e_user_level"=>3])->count();
         return $count;
     }
-    
+
     /**
      * @desc 今日加入团队的人数，
      * @param $team_name 团队名称
