@@ -36,7 +36,6 @@
                                     value="<?php if(!empty($post["audit_time"])){echo $post["audit_time"]; }?>"
                                     class="date" dateFmt="yyyy-MM-dd" readonly="true"/>
                     </td>
-
                     <td><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
                 </tr>
             </table>
