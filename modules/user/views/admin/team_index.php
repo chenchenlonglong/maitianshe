@@ -1,32 +1,29 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: chenlong
- * Date: 2016/8/1
- * Time: 23:13
+ * author: chenlong
+ * Date: 2016/8/15
+ * Time: 10:39
  */
+use app\common\Statistics;
 ?>
-<form id="pagerForm" method="post" action="index.php?r=user/admin/index">
+<form id="pagerForm" method="post" action="index.php?r=user/admin/team_show">
     <input type="hidden" name="pageNum" value="<?php isset($data['page'])?$data["page"]:0;?>" />
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
 </form>
 <div class="pageHeader">
-    <form   onsubmit="return navTabSearch(this);" action="index.php?r=user/admin/index" method="post" class="pageForm required-validate">
+    <form   onsubmit="return navTabSearch(this);" action="index.php?r=user/admin/team_show" method="post" class="pageForm required-validate">
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
                     <td>
-                        管理员姓名：<input type="text" name="admin_name" value="<?php  echo isset($data['admin_name'])?$data['admin_name']:"";?>" />
+                        团长姓名：<input type="text" name="user_name" value="<?php echo isset($data["user_name"])?$data["user_name"]:"";?>">
                     </td>
                     <td><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
                     <td >
-                        用户注册总数为:<span style="color: red; margin-left: 10px;"><?php echo $data["count"];?>人</span>
+                        团队总人数为:<span style="color: red; margin-left: 10px;"><?php  echo isset($data['total'])?$data["total"]:0?>人</span>
                     </td>
                     <td >
-                        今日注册人数为:<span style="color: red; margin-left: 10px;"><?php echo $data["today"];?>人</span>
-                    </td>
-                    <td >
-                        管理员总人数为:<span style="color: red; margin-left: 10px;"><?php echo $data['total'];?>人</span>
+                        今日新加入数为:<span style="color: red; margin-left: 10px;"><?php echo $data["reg_today"]?>人</span>
                     </td>
                 </tr>
             </table>
@@ -39,44 +36,30 @@
             <thead style="text-align: center">
             <tr>
                 <th width="80">用户id</th>
-                <th width="80">管理员姓名</th>
+                <th width="80">团长姓名</th>
                 <th width="80">微信号</th>
                 <th width="80">年龄阶段</th>
                 <th width="80">注册电话号</th>
                 <th width="80">用户邮箱</th>
-                <th width="80">团队名称</th>
                 <th width="80">外交官徽章数</th>
                 <th width="80">超级组徽章数</th>
                 <th width="80">支付宝账户</th>
-                <th width="80">操作</th>
+                <th width="80">历史成单数</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach($data["data"] as $value){?>
+            <?php  foreach($data["data"] as $value){?>
                 <tr>
-                    <td><?php  echo $value["user_id"];?></td>
+                    <td><?php echo $value["user_id"];?></td>
                     <td><?php  echo $value["e_user_name"];?></td>
                     <td><?php  echo $value["e_user_wx_number"];?></td>
                     <td><?php  echo Yii::$app->params["age_group"][$value["e_age_group"]];?></td>
                     <td><?php  echo $value["e_register_phone"];?></td>
                     <td><?php  echo $value["e_register_email"];?></td>
-                    <td>
-                        <a href="/index.php?r=user/admin/team_show&team_name=<?php echo $value["e_admin_team_name"]?>"  max="true"  target="navTab" title="团队详情" >
-                        <?php  echo   $value["e_admin_team_name"];?>
-                        </a>
-                    </td>
                     <td><?php  echo $value["e_diplomat_medal_number"];?></td>
                     <td><?php  echo $value["e_super_medal_number"];?></td>
                     <td><?php  echo $value["e_alipay_number"];?></td>
-                    <td>
-                        <a href="/index.php?r=user/admin/edit&user_id=<?php echo $value["user_id"]?>"  max="true"  target="navTab" title="管理员修改" >
-                            <span>修改</span>
-                        </a>/
-                        <a href="/index.php?r=user/admin/create_invite_show&user_id=<?php echo $value["user_id"]?>&user_name=<?php echo $value["e_user_name"];?>" rel="admin_id_index" target="dialog" title="生成邀请码" >
-                            <span>生成邀请码</span>
-                        </a>
-
-                    </td>
+                    <td><?php  echo Statistics::count_finish_team($value["user_id"])."单";?></td>
                 </tr>
             <?php }?>
             </tbody>
@@ -102,3 +85,4 @@
     </div>
 
 </div>
+

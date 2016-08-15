@@ -8,6 +8,7 @@
  */
 namespace app\modules\user\controllers;
 
+use app\common\User;
 use app\controllers\CommonController;
 use app\models\UserModel;
 use Yii;
@@ -18,20 +19,32 @@ use app\common\Qiniu;
 
 class AdminController extends  CommonController
 {
+    /**
+     * @desc 管理员列表显示
+     * @return string
+     */
     public  function actionIndex(){
         $page=$this->get_page_value();
         $userModel=new UserModel();
         //管理员标识
         $admin_name=Yii::$app->request->post("admin_name","");
         if($admin_name){
-            $data=   $userModel->getPage($userModel->find(),$page[0],$page[1],"e_active_time",["e_user_level"=>3],["e_user_name"=>$admin_name]);
+            $data=   $userModel->getPage($userModel->find(),$page[0],$page[1],"",["e_user_level"=>3],["e_user_name"=>$admin_name]);
         }else{
-            $data=   $userModel->getPage($userModel->find(),$page[0],$page[1],"e_active_time",["e_user_level"=>3]);
+            $data=   $userModel->getPage($userModel->find(),$page[0],$page[1],"",["e_user_level"=>3]);
         }
-
+        //注册总人数
+        $data["count"]=User::get_count();
+        //今日注册人数
+        $data["today"]=User::get_today_count();
         return $this->renderPartial("index",["data"=>$data]);
     }
 
+
+    /**
+     * @desc 管理员编辑显示
+     * @return string
+     */
     public function  actionEdit(){
         $user_id=Yii::$app->request->get("user_id","");
         $userModel= new UserModel();
@@ -57,6 +70,7 @@ class AdminController extends  CommonController
             "e_beneficiary_name"=>$post["e_beneficiary_name"]//支付宝收款账户
         ];
         $qr_code =UploadedFile::getInstance($userModel, "e_admin_wx_code_img");
+        file_put_contents("text.txt",$qr_code->type,FILE_APPEND);
         if($qr_code){
             if(in_array($qr_code->type,Yii::$app->params["image_allow"])){
                 $img_url=Qiniu::qiniu_upload($qr_code->tempName,Yii::$app->params["qiniu_params"]["qr_code_path"]);
@@ -75,10 +89,39 @@ class AdminController extends  CommonController
 
     }
 
-
+    /**
+     * @desc 创建邀请码显示
+     * @return string
+     */
     public  function  actionCreate_invite_show(){
         $user_id=Yii::$app->request->get("user_id","");
         $user_name=Yii::$app->request->get("user_name","");
         return $this->renderPartial("invite_show",["user_id"=>$user_id,"user_name"=>$user_name]);
     }
+
+
+
+
+
+    /**
+     * @desc 团队下团长列表展示
+     * @return string
+     */
+    public function actionTeam_show(){
+        $team_name=Yii::$app->request->get("team_name");
+        $page=$this->get_page_value();
+        $userModel = new UserModel();
+        $user_name=Yii::$app->request->post("user_name","");
+        $where=[];
+        if($user_name){
+            $where=["e_user_name"=>$user_name];
+        }
+        $data=$userModel->getPage($userModel->find(),$page[0],$page[1],"",["e_admin_team_name"=>$team_name],["!=","e_user_level",3],$where);
+        $data["reg_today"]=User::get_today_team_count($team_name);
+        $data["user_name"]=$user_name;
+        return $this->renderPartial("team_index",["data"=>$data]);
+    }
+
+
+
 }

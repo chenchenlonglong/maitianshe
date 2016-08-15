@@ -29,11 +29,11 @@ class ReduceController extends CommonController
     public  function actionIndex(){
         $page=$this->get_page_value();
         $reduceModel= new ReduceModel();
-        $sql=self::sql()." where a.`flag`=3003";
+        $sql=self::sql()." where a.`audit_time` is null and a.`audit_name` is null ";
         $result=$reduceModel->findBySql($sql)->asArray()->all();
         $data=$reduceModel->getPage_by_sql($result,$page[0],$page[1]);
         $start=($page[0]-1)*$page[1];
-        $sql=$sql." order by  a.`time` asc   limit {$start},{$page[1]};";
+        $sql=$sql."order by  a.`time` asc   limit {$start},{$page[1]};";
         $result=$reduceModel->findBySql($sql)->asArray()->all();
         $data["data"]=$result;
         return    $this->renderPartial("index",["data"=>$data]);
@@ -49,7 +49,7 @@ class ReduceController extends CommonController
         $reduceModel= new ReduceModel();
         $post=Yii::$app->request->post();
         $sql=self::sql();
-        $sql=$sql." where a.`flag`!=3003";
+        $sql=$sql." where a.`audit_time` is  not null and a.`audit_name` is not null";
         if($post){
             if($post["user_name"]){
                 $sql=$sql." and  b.`e_user_name`='{$post["user_name"]}'";
@@ -127,7 +127,7 @@ class ReduceController extends CommonController
           $reduceModel->updateAll(["flag"=>3004,"audit_time"=>time(),"audit_name"=>Tools::get_user_name()],["id"=>$id]);
           return Functions::return_json(200,"提现成功","","reduce_id_index","closeCurrent");
       }
-        $reduceModel->updateAll(["flag"=>3005,"audit_time"=>time(),"audit_name"=>Tools::get_user_name()],["id"=>$id]);
+        $reduceModel->updateAll(["flag"=>3005],["id"=>$id]);
         return Functions::return_json(300,$reduce_result["data"]["return_msg"],"","reduce_id_index","closeCurrent");
     }
 
@@ -142,8 +142,9 @@ class ReduceController extends CommonController
      * @return string
      */
     private function  sql(){
-        return "SELECT DISTINCT a.`id`, a.`user_id`,a.`flag`,a.`reason`,a.`amount`,a.`time`,a.`audit_time`, a.`audit_name`,
-                b.`e_user_name`AS user_name ,b.`e_user_wx_number` AS wx_name
+        return "SELECT DISTINCT a.`id`, a.`user_id`,a.`flag`,a.`reason`,a.`amount`,a.`time`,a.`audit_time`,
+                a.`audit_name`,b.`e_register_phone` as telephone,b.`e_admin_team_name` as team_name,b.`e_user_name` as user_name,b.`e_register_email`AS email,
+                b.`e_user_wx_number` AS wx_name
                 FROM hhs_reduce_money AS a LEFT JOIN hhs_users AS b ON a.`user_id`=b.`user_id` ";
     }
 

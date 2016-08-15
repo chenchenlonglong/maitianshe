@@ -6,6 +6,7 @@
  * Time: 14:20
  */
 namespace app\common;
+use app\models\OrderModel;
 use yii;
 use app\models\RebateModel;
 use app\models\ReduceModel;
@@ -511,5 +512,6 @@ class Statistics
         }
 
     }
+
 
 }
