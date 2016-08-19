@@ -52,4 +52,28 @@ class User
         $count=$userModel->find()->where(["and",[">=","reg_time",$time_first],["<=","reg_time",$time_sec],["e_admin_team_name"=>$team_name]])->count();
         return $count;
     }
+
+    /**
+     * @desc 查询团长总人数
+     * @return int|string
+     */
+    public  static  function  get_user_count(){
+        $userModel= new UserModel();
+        $count= $userModel->find()->where(["e_user_level"=>2])->count();
+        return $count;
+    }
+
+
+    /**
+     * @desc 今日成为团长的人数，
+     * @param $team_name 团队名称
+     * @return int|string
+     */
+    public static  function get_today_user_count(){
+        $userModel= new UserModel();
+        $time_first= strtotime(date("Y-m-d",time()));
+        $time_sec=$time_first+60*60*24;
+        $count=$userModel->find()->where(["and",[">=","reg_time",$time_first],["<=","reg_time",$time_sec],["e_user_level"=>2]])->count();
+        return $count;
+    }
 }
