@@ -44,6 +44,7 @@ use app\common\Statistics;
                 <th width="80">外交官徽章数</th>
                 <th width="80">超级组徽章数</th>
                 <th width="80">支付宝账户</th>
+                <th width="80">支付宝收款姓名</th>
                 <th width="80">历史成单数</th>
             </tr>
             </thead>
@@ -59,6 +60,7 @@ use app\common\Statistics;
                     <td><?php  echo $value["e_diplomat_medal_number"];?></td>
                     <td><?php  echo $value["e_super_medal_number"];?></td>
                     <td><?php  echo $value["e_alipay_number"];?></td>
+                    <td><?php  echo $value["e_beneficiary_name"];?></td>
                     <td><?php  echo Statistics::count_finish_team($value["user_id"])."单";?></td>
                 </tr>
             <?php }?>

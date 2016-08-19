@@ -48,6 +48,7 @@
                 <th width="80">外交官徽章数</th>
                 <th width="80">超级组徽章数</th>
                 <th width="80">支付宝账户</th>
+                <th width="80">支付宝收款姓名</th>
                 <th width="80">操作</th>
             </tr>
             </thead>
@@ -68,6 +69,7 @@
                     <td><?php  echo $value["e_diplomat_medal_number"];?></td>
                     <td><?php  echo $value["e_super_medal_number"];?></td>
                     <td><?php  echo $value["e_alipay_number"];?></td>
+                    <td><?php  echo $value["e_beneficiary_name"];?></td>
                     <td>
                         <a href="/index.php?r=user/admin/edit&user_id=<?php echo $value["user_id"]?>"  max="true"  target="navTab" title="管理员修改" >
                             <span>修改</span>
