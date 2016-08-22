@@ -20,10 +20,7 @@
                     </td>
                     <td><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
                     <td >
-                        用户注册总数为:<span style="color: red; margin-left: 10px;"><?php echo $data["count"];?>人</span>
-                    </td>
-                    <td >
-                        今日注册人数为:<span style="color: red; margin-left: 10px;"><?php echo $data["today"];?>人</span>
+                        用户总数为:<span style="color: red; margin-left: 10px;"><?php echo $data["count"];?>人</span>
                     </td>
                     <td >
                         管理员总人数为:<span style="color: red; margin-left: 10px;"><?php echo isset($data['total'])?$data["total"]:0;?>人</span>

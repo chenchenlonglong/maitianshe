@@ -22,9 +22,6 @@ use app\common\Statistics;
                     <td >
                         团长总人数为:<span style="color: red; margin-left: 10px;"><?php  echo isset($data['total_user'])?$data["total_user"]:0?>人</span>
                     </td>
-                    <td >
-                        今日新加入数为:<span style="color: red; margin-left: 10px;"><?php echo isset($data["reg_today"])?$data["reg_today"]:0;?>人</span>
-                    </td>
                 </tr>
             </table>
         </div>

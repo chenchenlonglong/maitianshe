@@ -17,7 +17,7 @@ class User
      */
     public  static  function get_count(){
         $userModel= new UserModel();
-        return $userModel->find()->count();
+        return $userModel->find()->where(["!=","e_user_level",1])->count();
     }
 
     /**

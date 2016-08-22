@@ -33,10 +33,8 @@ class AdminController extends  CommonController
         }else{
             $data=   $userModel->getPage($userModel->find(),$page[0],$page[1],"",["e_user_level"=>3]);
         }
-        //注册总人数
+        //用户总数
         $data["count"]=User::get_count();
-        //今日注册人数
-        $data["today"]=User::get_today_count();
         return $this->renderPartial("index",["data"=>$data]);
     }
 
