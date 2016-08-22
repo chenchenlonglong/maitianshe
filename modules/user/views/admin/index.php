@@ -20,10 +20,22 @@
                     </td>
                     <td><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
                     <td >
-                        用户总数为:<span style="color: red; margin-left: 10px;"><?php echo $data["count"];?>人</span>
+                        普通用户人数:<span style="color: red; margin-left: 10px;"><?php echo $data["common_user"];?>人</span>
+                    </td>      <td >
+                        团长用户人数:<span style="color: red; margin-left: 10px;"><?php echo $data["user"];?>人</span>
                     </td>
                     <td >
-                        管理员总人数为:<span style="color: red; margin-left: 10px;"><?php echo isset($data['total'])?$data["total"]:0;?>人</span>
+                        管理员用户人数为:<span style="color: red; margin-left: 10px;"><?php echo $data['admin'];?>人</span>
+                    </td>
+                    <td>|||</td>
+                    <td >
+                        今日新加管理员人数为:<span style="color: red; margin-left: 10px;"><?php echo $data['today_admin'];?>人</span>
+                    </td>
+                    <td >
+                        今日新加团长人数为:<span style="color: red; margin-left: 10px;"><?php echo $data['today_user'];?>人</span>
+                    </td>
+                    <td >
+                        今日新加普通用户人数为:<span style="color: red; margin-left: 10px;"><?php echo $data['today_common_user'];?>人</span>
                     </td>
                 </tr>
             </table>

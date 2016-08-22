@@ -33,8 +33,19 @@ class AdminController extends  CommonController
         }else{
             $data=   $userModel->getPage($userModel->find(),$page[0],$page[1],"",["e_user_level"=>3]);
         }
-        //用户总数
-        $data["count"]=User::get_count();
+        //普通用户数
+        $data["common_user"]=User::get_common_user_count();
+        //团长用户数
+        $data["user"]=User::get_user_count();
+        //管理员用户数
+        $data["admin"]=User::get_admin_count();
+        //今日新增管理员用户数
+        $data["today_admin"]=User::get_today_admin_count();
+        //今日新增团长用户数
+        $data["today_user"]=User::get_today_user_count();
+        //今日新增普通用户数
+        $data["today_common_user"]=User::get_today_common_user_count();
+
         return $this->renderPartial("index",["data"=>$data]);
     }
 
@@ -114,7 +125,6 @@ class AdminController extends  CommonController
             $where=["e_user_name"=>$user_name];
         }
         $data=$userModel->getPage($userModel->find(),$page[0],$page[1],"",["e_admin_team_name"=>$team_name],["!=","e_user_level",3],$where);
-        $data["reg_today"]=User::get_today_team_count($team_name);
         $data["user_name"]=$user_name;
         return $this->renderPartial("team_index",["data"=>$data]);
     }

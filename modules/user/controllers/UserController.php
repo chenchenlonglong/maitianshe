@@ -26,6 +26,7 @@ class UserController extends  CommonController
         }
         $data=$userModel->getPage($userModel->find(),$page[0],$page[1],"reg_time",["e_user_level"=>2],$where);
         $data["total_user"]=User::get_user_count();
+        $data["today_user"]=User::get_today_user_count();
         return $this->renderPartial("index",["data"=>$data]);
     }
 }
