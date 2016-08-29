@@ -10,7 +10,7 @@ namespace app\common;
 
 class Task
 {
-    public  static  function  get_task(){
+    public  static  function  get_task_name(){
 
     }
 

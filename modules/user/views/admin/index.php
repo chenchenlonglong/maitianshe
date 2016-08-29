@@ -54,6 +54,7 @@
                 <th width="80">注册电话号</th>
                 <th width="80">用户邮箱</th>
                 <th width="80">团队名称</th>
+                <th width="80">团队成单数</th>
                 <th width="80">外交官徽章数</th>
                 <th width="80">超级组徽章数</th>
                 <th width="80">支付宝账户</th>
@@ -75,6 +76,7 @@
                         <?php  echo   $value["e_admin_team_name"];?>
                         </a>
                     </td>
+                    <td><?php  echo $value["e_diplomat_medal_number"];?></td>
                     <td><?php  echo $value["e_diplomat_medal_number"];?></td>
                     <td><?php  echo $value["e_super_medal_number"];?></td>
                     <td><?php  echo $value["e_alipay_number"];?></td>

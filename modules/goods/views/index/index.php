@@ -6,7 +6,7 @@
  */
 use yii\helpers\Url;
 ?>
-<form id="pagerForm" method="post" action="index.php?r=invate/index/index">
+<form id="pagerForm" method="post" action="index.php?r=goods/index/index">
     <input type="hidden" name="pageNum" value="<?php isset($data['page'])?$data["page"]:0;?>" />
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:30;?>" />
 </form>
@@ -35,6 +35,7 @@ use yii\helpers\Url;
                 <th width="125">货号</th>
                 <th width="80">价格</th>
                 <th width="125">参团人数</th>
+                <th width="125">任务组</th>
                 <th width="100">团购价格</th>
                 <th width="100">团购销量</th>
                 <th width="80">精品</th>
@@ -53,6 +54,7 @@ use yii\helpers\Url;
                     <td><?php echo $value["goods_sn"];?></td>
                     <td><?php echo $value["shop_price"];?></td>
                     <td><?php echo $value["team_num"];?></td>
+                    <td><?php  if(!empty($value["task_level"])){ echo $task[$value["task_level"]-1]["task_name"]; }else{ echo "";} ;?></td>
                     <td><?php echo $value["team_price"];?></td>
                     <td><?php echo $value["sales_num"];?></td>
                     <td><?php echo $value["is_best"];?></td>

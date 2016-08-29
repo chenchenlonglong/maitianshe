@@ -37,8 +37,9 @@ class IndexController extends CommonController
             $data=$goodsModel->getPage($goodsModel->find(),$page_info[0],$page_info[1]);
         }
         $data["goods_id"]=$goods_id;
-
-        return $this->renderPartial("index",["data"=>$data]);
+        $taskModel= new TaskModel();
+        $task=$taskModel->find()->distinct(["task_name"])->select(["task_level","task_name"])->asArray()->all();
+        return $this->renderPartial("index",["data"=>$data,"task"=>$task]);
     }
 
     /**
