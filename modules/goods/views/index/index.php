@@ -16,7 +16,18 @@ use yii\helpers\Url;
             <table class="searchContent">
                 <tr>
                     <td>
-                        商品编号：<input type="text" name="goods_id" value="<?php  echo isset($data['goods_id'])?$data['goods_id']:"";?>" />
+                        商品货号：<input type="text" name="goods_sn" value="<?php  echo isset($data['goods_sn'])?$data['goods_sn']:"";?>" />
+                    </td>
+                    <td>
+<!--                        任务组:-->
+<!--                        <select name="task_level">-->
+<!--                            <option value="0">无任务组</option>-->
+<!--                            --><?php //foreach($task as $key=>$value){
+//                                ?>
+<!--                                <option value="--><?php //echo $value["task_level"]?><!--">--><?php //echo $value["task_name"]?><!--</option>-->
+<!--                            --><?php
+//                            }?>
+<!--                        </select>-->
                     </td>
                     <td><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
                 </tr>

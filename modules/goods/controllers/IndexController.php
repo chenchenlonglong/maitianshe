@@ -28,16 +28,13 @@ class IndexController extends CommonController
     public  function  actionIndex(){
         $goodsModel= new GoodsModel();
         $page_info= $this->get_page_value();
-        $goods_id=Yii::$app->request->post("goods_id","");
-        if(!preg_match("/^[0-9]*$/",$goods_id)){
-            Functions::dwz_json(300,"商品编号格式不正确");
-        }
-        if($goods_id){
-            $data=$goodsModel->getPage($goodsModel->find(),$page_info[0],$page_info[1],"last_update desc ",["goods_id"=>$goods_id]);
+        $goods_sn=Yii::$app->request->post("goods_sn","");
+        if($goods_sn){
+            $data=$goodsModel->getPage($goodsModel->find(),$page_info[0],$page_info[1],"last_update desc ",["goods_sn"=>$goods_sn]);
         }else{
             $data=$goodsModel->getPage($goodsModel->find(),$page_info[0],$page_info[1],"last_update desc");
         }
-        $data["goods_id"]=$goods_id;
+        $data["goods_sn"]=$goods_sn;
         $taskModel= new TaskModel();
         $task=$taskModel->find()->distinct(["task_name"])->select(["task_level","task_name"])->asArray()->all();
         return $this->renderPartial("index",["data"=>$data,"task"=>$task]);
@@ -80,6 +77,10 @@ class IndexController extends CommonController
 
     }
 
+    /**
+     * @desc 置顶
+     * @return string
+     */
     public  function  actionPull(){
         $goods_id=Yii::$app->request->get("goods_id");
         $goodsModelYang=new GoodsModel();
