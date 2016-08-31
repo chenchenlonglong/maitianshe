@@ -50,7 +50,7 @@ use yii\helpers\Url;
                 <th width="100">商品名称</th>
                 <th width="125">货号</th>
                 <th width="80">价格</th>
-                <th width="125">参团人数</th>
+                <th width="80">参团人数</th>
                 <th width="125">任务组</th>
                 <th width="100">团购价格</th>
                 <th width="100">团购销量</th>
@@ -58,7 +58,6 @@ use yii\helpers\Url;
                 <th width="80">新品</th>
                 <th width="80">热销</th>
                 <th width="80">上架</th>
-                <th width="80">推荐排序</th>
                 <th width="80">操作</th>
             </tr>
             </thead>
@@ -77,7 +76,6 @@ use yii\helpers\Url;
                     <td><?php echo empty($value["is_new"])?"-":"是";?></td>
                     <td><?php echo empty($value["is_hot"])?"-":"是";;?></td>
                     <td><?php echo empty($value["is_on_sale"])?"-":"是";;?></td>
-                    <td><?php echo $value["goods_number"];?></td>
                     <td>
                         <a href="/index.php?r=goods/index/edit&goods_id=<?php echo $value["goods_id"]?>"  max="true"  target="navTab" title="编辑" >编辑</a>/
                         <a href="/index.php?r=goods/index/pull&goods_id=<?php echo $value["goods_id"]?>" class="del" target="ajaxTodo"  title="确认置顶？" >置顶</a>
