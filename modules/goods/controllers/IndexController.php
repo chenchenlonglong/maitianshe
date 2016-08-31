@@ -29,12 +29,21 @@ class IndexController extends CommonController
         $goodsModel= new GoodsModel();
         $page_info= $this->get_page_value();
         $goods_sn=Yii::$app->request->post("goods_sn","");
-        if($goods_sn){
-            $data=$goodsModel->getPage($goodsModel->find(),$page_info[0],$page_info[1],"last_update desc ",["goods_sn"=>$goods_sn]);
+        $task_level=Yii::$app->request->post("task_level","");
+        $team_num=Yii::$app->request->post("team_num","");
+        $where=[
+            "goods_sn"=>$goods_sn,
+            "task_level"=>$task_level,
+            "team_num"=>$team_num,
+        ];
+        if($where){
+            $data=$goodsModel->getPage($goodsModel->find(),$page_info[0],$page_info[1],"last_update desc ",$where);
         }else{
             $data=$goodsModel->getPage($goodsModel->find(),$page_info[0],$page_info[1],"last_update desc");
         }
         $data["goods_sn"]=$goods_sn;
+        $data["task_level"]=$task_level;
+        $data["team_num"]=$team_num;
         $taskModel= new TaskModel();
         $task=$taskModel->find()->distinct(["task_name"])->select(["task_level","task_name"])->asArray()->all();
         return $this->renderPartial("index",["data"=>$data,"task"=>$task]);

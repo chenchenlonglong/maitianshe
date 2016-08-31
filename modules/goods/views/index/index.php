@@ -18,16 +18,21 @@ use yii\helpers\Url;
                     <td>
                         商品货号：<input type="text" name="goods_sn" value="<?php  echo isset($data['goods_sn'])?$data['goods_sn']:"";?>" />
                     </td>
+
                     <td>
-<!--                        任务组:-->
-<!--                        <select name="task_level">-->
-<!--                            <option value="0">无任务组</option>-->
-<!--                            --><?php //foreach($task as $key=>$value){
-//                                ?>
-<!--                                <option value="--><?php //echo $value["task_level"]?><!--">--><?php //echo $value["task_name"]?><!--</option>-->
-<!--                            --><?php
-//                            }?>
-<!--                        </select>-->
+                        任务组:
+                        <select name="task_level">
+                            <option value="" <?php if($data["task_level"]===""){echo "selected='selected'";}?>>请选择</option>
+                            <option value="0" <?php if($data["task_level"]==="0"){echo "selected='selected'";}?>>无任务组</option>
+                            <?php foreach($task as $key=>$value){
+                                ?>
+                                <option value="<?php echo $value["task_level"]?>" <?php if($data["task_level"]==$value["task_level"]){echo "selected='selected'";}?>><?php echo $value["task_name"]?></option>
+                            <?php
+                            }?>
+                        </select>
+                    </td>
+                    <td>
+                        参团人数：<input type="text"  style="width: 60px;" name="team_num" value="<?php  echo isset($data['team_num'])?$data['team_num']:"";?>" />
                     </td>
                     <td><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
                 </tr>
