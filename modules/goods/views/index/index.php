@@ -57,13 +57,14 @@ use yii\helpers\Url;
                     <td><?php  if(!empty($value["task_level"])){ echo $task[$value["task_level"]-1]["task_name"]; }else{ echo "";} ;?></td>
                     <td><?php echo $value["team_price"];?></td>
                     <td><?php echo $value["sales_num"];?></td>
-                    <td><?php echo $value["is_best"];?></td>
-                    <td><?php echo $value["is_new"];?></td>
-                    <td><?php echo $value["is_hot"];?></td>
-                    <td><?php echo $value["is_on_sale"];?></td>
+                    <td><?php echo empty($value["is_best"])?"-":"是";?></td>
+                    <td><?php echo empty($value["is_new"])?"-":"是";?></td>
+                    <td><?php echo empty($value["is_hot"])?"-":"是";;?></td>
+                    <td><?php echo empty($value["is_on_sale"])?"-":"是";;?></td>
                     <td><?php echo $value["goods_number"];?></td>
                     <td>
-                        <a href="/index.php?r=goods/index/edit&goods_id=<?php echo $value["goods_id"]?>"  max="true"  target="navTab" title="编辑" >编辑</a>
+                        <a href="/index.php?r=goods/index/edit&goods_id=<?php echo $value["goods_id"]?>"  max="true"  target="navTab" title="编辑" >编辑</a>/
+                        <a href="/index.php?r=goods/index/pull&goods_id=<?php echo $value["goods_id"]?>" class="del" target="ajaxTodo"  title="确认置顶？" >置顶</a>
                     </td>
                 </tr>
             <?php }?>

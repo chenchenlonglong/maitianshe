@@ -9,6 +9,7 @@ namespace app\modules\goods\controllers;
 
 use app\common\Task;
 use app\controllers\CommonController;
+use app\models\Goods_bakModel;
 use app\models\GoodsModel;
 use app\models\InviteModel;
 
@@ -32,9 +33,9 @@ class IndexController extends CommonController
             Functions::dwz_json(300,"商品编号格式不正确");
         }
         if($goods_id){
-            $data=$goodsModel->getPage($goodsModel->find(),$page_info[0],$page_info[1],"",["goods_id"=>$goods_id]);
+            $data=$goodsModel->getPage($goodsModel->find(),$page_info[0],$page_info[1],"last_update desc ",["goods_id"=>$goods_id]);
         }else{
-            $data=$goodsModel->getPage($goodsModel->find(),$page_info[0],$page_info[1]);
+            $data=$goodsModel->getPage($goodsModel->find(),$page_info[0],$page_info[1],"last_update desc");
         }
         $data["goods_id"]=$goods_id;
         $taskModel= new TaskModel();
@@ -77,6 +78,20 @@ class IndexController extends CommonController
             return $this->renderPartial("edit",["data"=>$goods,"task"=>$task]);
         }
 
+    }
+
+    public  function  actionPull(){
+        $goods_id=Yii::$app->request->get("goods_id");
+        $goodsModelYang=new GoodsModel();
+        $goodsModel= new Goods_bakModel();
+        $result_one=$goodsModelYang->findOne(["goods_id"=>$goods_id]);
+        $result=$goodsModel->findOne(["goods_id"=>$goods_id]);
+        $result_one->last_update=time();
+        $result->last_update=time();
+        if($result->save() && $result_one->save()){
+            return Functions::return_json(200,"置顶成功");
+        }
+        Functions::dwz_json(300,"修改失败");
     }
 
 }
