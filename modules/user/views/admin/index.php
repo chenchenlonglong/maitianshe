@@ -5,6 +5,7 @@
  * Date: 2016/8/1
  * Time: 23:13
  */
+use app\common\Statistics;
 ?>
 <form id="pagerForm" method="post" action="index.php?r=user/admin/index">
     <input type="hidden" name="pageNum" value="<?php isset($data['page'])?$data["page"]:0;?>" />
@@ -76,7 +77,7 @@
                         <?php  echo   $value["e_admin_team_name"];?>
                         </a>
                     </td>
-                    <td><?php  echo $value["e_diplomat_medal_number"];?></td>
+                    <td><?php  echo Statistics::count_finish_team($value["user_id"]);?></td>
                     <td><?php  echo $value["e_diplomat_medal_number"];?></td>
                     <td><?php  echo $value["e_super_medal_number"];?></td>
                     <td><?php  echo $value["e_alipay_number"];?></td>

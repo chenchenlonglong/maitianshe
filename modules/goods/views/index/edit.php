@@ -6,7 +6,7 @@
  */
 ?>
 <div class="pageContent">
-    <h2 class="contentTitle">编辑渠道</h2>
+    <h2 class="contentTitle">商品编辑</h2>
     <form   method="post" action="index.php?r=goods/index/edit" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
         <div class="pageFormContent" layoutH="100">
             <fieldset>
