@@ -238,7 +238,7 @@ class Statistics
      */
     public static function reduce_total_money($user_id){
         $Reduce =new ReduceModel();
-        $reduce_total=$Reduce::find()->where(['user_id'=>$user_id,'flag'=>3004])->all();
+        $reduce_total=  $Reduce->find()->where(["user_id"=>$user_id,"flag"=>3004])->andWhere(["!=","audit_time",""])->asArray()->all();
         $total=0;
         if($reduce_total){
             foreach($reduce_total as $k=>$v){
@@ -249,6 +249,7 @@ class Statistics
             return $total;
         }
     }
+
 
     /**
      * @desc:管理员的团队人数
