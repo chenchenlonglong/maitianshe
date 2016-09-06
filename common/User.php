@@ -84,6 +84,15 @@ class User
         return $count;
     }
 
+    /**
+     * @desc 查询某个团队下的人数
+     * @param $team_name
+     * @return int|string
+     */
+    public  static function  get_team_num($team_name){
+        $userModel = new UserModel();
+        return   $userModel->find()->where(["e_admin_team_name"=>$team_name])->andWhere(["!=","e_user_level",3])->count();
+    }
 
 
 

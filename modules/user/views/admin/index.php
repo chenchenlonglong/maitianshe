@@ -6,6 +6,8 @@
  * Time: 23:13
  */
 use app\common\Statistics;
+use app\common\User;
+use app\common\Invite;
 ?>
 <form id="pagerForm" method="post" action="index.php?r=user/admin/index">
     <input type="hidden" name="pageNum" value="<?php isset($data['page'])?$data["page"]:0;?>" />
@@ -55,7 +57,9 @@ use app\common\Statistics;
                 <th width="80">注册电话号</th>
                 <th width="80">用户邮箱</th>
                 <th width="80">团队名称</th>
+                <th width="80">团队人数</th>
                 <th width="80">团队成单数</th>
+                <th width="80">剩余邀请码数</th>
                 <th width="80">外交官徽章数</th>
                 <th width="80">超级组徽章数</th>
                 <th width="80">支付宝账户</th>
@@ -77,7 +81,9 @@ use app\common\Statistics;
                         <?php  echo   $value["e_admin_team_name"];?>
                         </a>
                     </td>
+                    <td><?php  echo User::get_team_num($value["e_admin_team_name"])."人";?></td>
                     <td><?php  echo Statistics::count_finish_team($value["user_id"]);?></td>
+                    <td><?php  echo  Invite::get_residue_invite($value["user_id"]);?></td>
                     <td><?php  echo $value["e_diplomat_medal_number"];?></td>
                     <td><?php  echo $value["e_super_medal_number"];?></td>
                     <td><?php  echo $value["e_alipay_number"];?></td>

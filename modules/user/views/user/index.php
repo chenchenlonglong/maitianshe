@@ -47,6 +47,7 @@ use app\common\Statistics;
                 <th width="80">支付宝账户</th>
                 <th width="80">支付宝收款姓名</th>
                 <th width="80">历史成单数</th>
+                <th width="80">开团总数</th>
             </tr>
             </thead>
             <tbody>
@@ -64,6 +65,7 @@ use app\common\Statistics;
                     <td><?php  echo $value["e_alipay_number"];?></td>
                     <td><?php  echo $value["e_beneficiary_name"];?></td>
                     <td><?php  echo Statistics::count_finish_team($value["user_id"])."单";?></td>
+                    <td><?php  echo Statistics::count_create_team($value["user_id"])."单";?></td>
                 </tr>
             <?php }?>
             </tbody>

@@ -213,6 +213,50 @@ class Statistics
         return $finish_team;
     }
 
+    /**
+     * @desc:查看某人的(开团数量)
+     * @param $user_id
+     * @param int $start_time
+     * @param int $end_time
+     * @return int|string
+     */
+    public static function count_create_team($user_id,$start_time = 0,$end_time = 0){
+
+        $model = new OrderModel();
+        if($start_time != 0 && $end_time == 0){
+            $finish_team = $model->find()
+                ->andWhere(['team_first'=>1])
+                ->andWhere(['user_id' => $user_id])
+                ->andWhere(['>=', 'add_time', $start_time])
+                ->asArray()
+                ->count();
+        }elseif($start_time == 0 && $end_time != 0){
+            $finish_team = $model->find()
+                ->andWhere(['team_first'=>1])
+                ->andWhere(['user_id' => $user_id])
+                ->andWhere(['<=', 'add_time', $end_time])
+                ->asArray()
+                ->count();
+        }elseif($start_time != 0 && $end_time != 0){
+            $finish_team = $model->find()
+                ->andWhere(['team_first'=>1])
+                ->andWhere(['user_id' => $user_id])
+                ->andWhere(['>=', 'add_time', $start_time])
+                ->andWhere(['<=', 'add_time', $end_time])
+                ->asArray()
+                ->count();
+        }else{
+            $finish_team = $model->find()
+                ->andWhere(['team_first'=>1])
+                ->andWhere(['user_id' => $user_id])
+                ->asArray()
+                ->count();
+        }
+
+        return $finish_team;
+    }
+
+
 
     /**
      * @desc:计算用户剩余可以提现的资金(一共收入的提现资金减去已经提取得提现资金，就为用户可以剩余可以提现的资金)
@@ -226,9 +270,9 @@ class Statistics
         //计算总共进入多少提现资金
         $true_in_money = Statistics::count_true_money($user_id,$flag,$start_time,$end_time);
         //计算总共支出多少提现资金
-        $ture_out_money = Statistics::reduce_total_money($user_id);
+        $true_out_money = Statistics::reduce_total_money($user_id);
 
-        return $true_in_money-$ture_out_money;
+        return $true_in_money-$true_out_money;
     }
 
     /**
