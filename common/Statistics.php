@@ -6,6 +6,7 @@
  * Time: 14:20
  */
 namespace app\common;
+use app\models\AdminrelationModel;
 use app\models\OrderModel;
 use yii;
 use app\models\RebateModel;
@@ -168,7 +169,19 @@ class Statistics
 
         return $total_forzen_money;
     }
-
+    /**
+     *  @desc:得到管理员的团队总累计成团数
+     * @param $admin_id
+     * @return int
+     */
+    public static function get_admin_team_num($admin_id){
+        $count_finish_team=0;
+        $user_ids=AdminrelationModel::find()->where(['admin_id'=>$admin_id])->all();
+        foreach($user_ids as $k=>$v){
+            $count_finish_team+=Statistics::count_finish_team($v['head_id']);//成团数
+        }
+        return $count_finish_team;
+    }
 
     /**
      * @desc:查看某人的开团成功数量
@@ -295,19 +308,6 @@ class Statistics
     }
 
 
-    /**
-     * @desc:管理员的团队人数
-     * @param $admin_id
-     * @return int
-     */
-    public static function admin_team_num($admin_id){
-        $admin_model = new AdminrelationModel();
-        $team_num = $admin_model->find()
-            ->where(['admin_id'=>$admin_id])
-            ->asArray()
-            ->count();
-        return $team_num;
-    }
 
     /**
      * @desc:邀请人数统计

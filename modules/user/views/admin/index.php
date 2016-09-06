@@ -81,8 +81,8 @@ use app\common\Invite;
                         <?php  echo   $value["e_admin_team_name"];?>
                         </a>
                     </td>
-                    <td><?php  echo User::get_team_num($value["e_admin_team_name"])."人";?></td>
-                    <td><?php  echo Statistics::count_finish_team($value["user_id"]);?></td>
+                    <td><?php  echo  User::admin_team_num($value["user_id"])."人";?></td>
+                    <td><?php  echo  Statistics::get_admin_team_num($value["user_id"]);?></td>
                     <td><?php  echo  Invite::get_residue_invite($value["user_id"]);?></td>
                     <td><?php  echo $value["e_diplomat_medal_number"];?></td>
                     <td><?php  echo $value["e_super_medal_number"];?></td>

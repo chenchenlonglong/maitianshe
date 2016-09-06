@@ -8,6 +8,7 @@
 namespace app\common;
 
 
+use app\models\AdminrelationModel;
 use app\models\UserModel;
 
 class User
@@ -94,7 +95,19 @@ class User
         return   $userModel->find()->where(["e_admin_team_name"=>$team_name])->andWhere(["!=","e_user_level",3])->count();
     }
 
-
+    /**
+     * @desc:管理员的团队人数
+     * @param $admin_id
+     * @return int
+     */
+    public static function admin_team_num($admin_id){
+        $admin_model = new AdminrelationModel();
+        $team_num = $admin_model->find()
+            ->where(['admin_id'=>$admin_id])
+            ->asArray()
+            ->count();
+        return $team_num;
+    }
 
 
 
