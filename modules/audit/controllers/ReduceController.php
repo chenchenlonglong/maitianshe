@@ -142,7 +142,7 @@ class ReduceController extends CommonController
      * @desc 列表sql
      * @return string
      */
-    private function  sql(){
+    private function    sql(){
         return "SELECT DISTINCT a.`id`, a.`user_id`,a.`flag`,a.`reason`,a.`amount`,a.`time`,a.`audit_time`,b.`uname`,
                 a.`audit_name`,b.`e_register_phone` as telephone,b.`e_admin_team_name` as team_name,b.`e_user_name` as user_name,b.`e_register_email`AS email,
                 b.`e_user_wx_number` AS wx_name

@@ -19,7 +19,9 @@
             <tr>
                 <th width="80">序号</th>
                 <th width="100">用户名称</th>
+                <th width="125">用户微信名</th>
                 <th width="125">用户微信号</th>
+                <th width="80">团队名称</th>
                 <th width="80">提现金额</th>
                 <th width="125">提现状态</th>
                 <th width="100">提现原因</th>
@@ -32,7 +34,9 @@
                 <tr>
                     <td><?php echo $value["id"]?></td>
                     <td><?php echo $value["user_name"]?></td>
+                    <td><?php echo $value["uname"]?></td>
                     <td><?php echo $value["wx_name"]?></td>
+                    <td><?php  echo $value["team_name"]?></td>
                     <td><?php echo $value["amount"]?>元</td>
                     <td><?php echo Yii::$app->params["audit_status"][$value["flag"]];?></td>
                     <td><?php echo $value["reason"]?></td>
