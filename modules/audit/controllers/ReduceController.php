@@ -10,6 +10,8 @@ namespace app\modules\audit\controllers;
 use app\common\Statistics;
 use app\common\Tools;
 use app\controllers\CommonController;
+use app\models\OrderModel;
+use app\models\RebateModel;
 use app\models\ReduceModel;
 use app\models\UserModel;
 use Yii;
@@ -94,9 +96,35 @@ class ReduceController extends CommonController
         $reduceModel= new ReduceModel();
         $sql=self::sql(). " where a.`id`={$id} and a.`user_id`={$user_id}";
         $data= $reduceModel->findBySql($sql)->asArray()->one();
-        $reduce_all_money=Statistics::count_tatal_true_money($user_id);
+        $reduce_all_money=Statistics::count_tatal_true_money($user_id);//可提现的所有金额
         $data["reduce_all_money"]=$reduce_all_money;
-        return $this->renderPartial("reduce",["data"=>$data]);
+        $message=self::check_reduce($user_id);
+        if($message){
+            Functions::dwz_json(300,$message);
+        }
+            return $this->renderPartial("reduce",["data"=>$data]);
+
+    }
+
+
+    /**
+     * @param $user_id
+     * @return string
+     */
+    private  function  check_reduce($user_id){
+        $rebateModel= new RebateModel();
+        $reduce_detail=$rebateModel->find()->select("invite_id")->where(["user_id"=>$user_id,"status"=>3004,"flag"=>4,"check"=>0])->asArray()->all();
+        $orderModel= new OrderModel();
+        $mess="";
+        foreach($reduce_detail as  $key=>$value){
+            $result=$orderModel->find()->where(["user_id"=>$user_id,"team_sign"=>$value["invite_id"],"team_status"=>2])->asArray()->all();
+            if(empty($result)){
+                $mess.=$value["invite_id"]."数据异常";
+            }
+            $rebateModel->updateAll(["check"=>1],["user_id"=>$user_id,"invite_id"=>$value["invite_id"]]);
+        }
+        return $mess;
+
     }
 
 
