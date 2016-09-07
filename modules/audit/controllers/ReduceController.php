@@ -119,7 +119,8 @@ class ReduceController extends CommonController
         foreach($reduce_detail as  $key=>$value){
             $result=$orderModel->find()->where(["user_id"=>$user_id,"team_sign"=>$value["invite_id"],"team_status"=>2])->asArray()->all();
             if(empty($result)){
-                $mess.=$value["invite_id"]."数据异常";
+                $mess=$value["invite_id"]."数据异常。";
+                break;
             }
             $rebateModel->updateAll(["check"=>1],["user_id"=>$user_id,"invite_id"=>$value["invite_id"]]);
         }
