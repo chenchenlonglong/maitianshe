@@ -20,18 +20,20 @@
                     <label>用户联系电话：</label>
                     <?php  echo $data["telephone"]?>
                 </p>
-                <p>
-                    <label>用户所在组名称：</label>
-                    <?php  echo $data["team_name"]?>
-                </p>
+
                 <p>
                     <label>用户微信号：</label>
                     <?php  echo $data["wx_name"]?>
                 </p>
                 <p>
-                    <label>提现原因：</label>
-                    <?php  echo $data["reason"]?>
+                    <label>用户微信名：</label>
+                    <?php  echo $data["uname"]?>
                 </p>
+                <p>
+                    <label>用户团队名称：</label>
+                    <?php  echo $data["team_name"]?>
+                </p>
+
                 <p>
                     <label>提现金额：</label>
                     <span style="color: red"> <?php  echo $data["amount"]?>元</span>
@@ -39,6 +41,10 @@
                 <p>
                     <label>用户可提现总金额：</label>
                     <span style="color: red"> <?php  echo $data["reduce_all_money"]?>元</span>
+                </p>
+                <p>
+                    <label>提现原因：</label>
+                    <?php  echo $data["reason"]?>
                 </p>
 
             </div>
