@@ -152,6 +152,8 @@ class ReduceController extends CommonController
         $curl= new Curl();
         $reduce_result_json=$curl->setOption(CURLOPT_POSTFIELDS, http_build_query($message))->post(yii::$app->params['reduce_url']);
         $reduce_result=json_decode($reduce_result_json,true);
+        file_put_contents("reduce.txt", date("Y-m-d H:i:s", time()) ."trade_no".$data["trade_no"]. $reduce_result_json . "\r", FILE_APPEND);
+        file_put_contents("params.txt", date("Y-m-d H:i:s", time()) . json_encode($message) . "\r", FILE_APPEND);
         if($reduce_result["code"]==200){
           $reduceModel->updateAll(["flag"=>3004,"audit_time"=>time(),"audit_name"=>Tools::get_user_name()],["id"=>$id]);
           return Functions::return_json(200,"提现成功","","reduce_id_index","closeCurrent");

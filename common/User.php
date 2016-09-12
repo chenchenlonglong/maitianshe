@@ -50,7 +50,7 @@ class User
     public static function get_today_admin_count()
     {
         $userModel = new UserModel();
-        $time_first = strtotime(date("Y-m-d", time()));
+        $time_first = strtotime(date("Y-m-d"));
         $time_sec = $time_first + 60 * 60 * 24;
         $reg_today = $userModel->find()->where(["and", [">=", "reg_time", $time_first], ["<=", "reg_time", $time_sec]])->andWhere(["e_user_level" => 3])->count();
         return $reg_today;
@@ -65,7 +65,7 @@ class User
     public static function get_today_user_count()
     {
         $userModel = new UserModel();
-        $time_first = strtotime(date("Y-m-d", time()));
+        $time_first = strtotime(date("Y-m-d"));
         $time_sec = $time_first + 60 * 60 * 24;
         $count = $userModel->find()->where(["and", [">=", "reg_time", $time_first], ["<=", "reg_time", $time_sec], ["e_user_level" => 2]])->count();
         return $count;
@@ -79,7 +79,7 @@ class User
     public static function get_today_common_user_count()
     {
         $userModel = new UserModel();
-        $time_first = strtotime(date("Y-m-d", time()));
+        $time_first = strtotime(date("Y-m-d"));
         $time_sec = $time_first + 60 * 60 * 24;
         $count = $userModel->find()->where(["and", [">=", "reg_time", $time_first], ["<=", "reg_time", $time_sec], ["e_user_level" => 1]])->count();
         return $count;

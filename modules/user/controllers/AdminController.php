@@ -116,17 +116,19 @@ class AdminController extends  CommonController
      * @return string
      */
     public function actionTeam_show(){
-        $team_name=Yii::$app->request->get("team_name");
+        $team_name_get=Yii::$app->request->get("team_name","");
+        $team_name_post=Yii::$app->request->post("team_name","");
+        $user_name=Yii::$app->request->post("user_name","");
         $page=$this->get_page_value();
         $userModel = new UserModel();
-        $user_name=Yii::$app->request->post("user_name","");
+        $team_name=empty($team_name_get)?$team_name_post:$team_name_get;
         $where=[];
         if($user_name){
             $where=["e_user_name"=>$user_name];
         }
         $data=$userModel->getPage($userModel->find(),$page[0],$page[1],"",["e_admin_team_name"=>$team_name],["!=","e_user_level",3],$where);
         $data["user_name"]=$user_name;
-        return $this->renderPartial("team_index",["data"=>$data]);
+        return $this->renderPartial("team_index",["data"=>$data,"team_name"=>$team_name]);
     }
 
 

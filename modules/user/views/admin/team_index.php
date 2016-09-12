@@ -9,6 +9,7 @@ use app\common\Statistics;
 <form id="pagerForm" method="post" action="index.php?r=user/admin/team_show">
     <input type="hidden" name="pageNum" value="<?php isset($data['page'])?$data["page"]:0;?>" />
     <input type="hidden" name="numPerPage" value="<?php echo isset($data['page_num'])?$data['page_num']:50;?>" />
+    <input type="hidden" name="team_name" value="<?php echo isset($team_name)?$team_name:"";?>" />
 </form>
 <div class="pageHeader">
     <form   onsubmit="return navTabSearch(this);" action="index.php?r=user/admin/team_show" method="post" class="pageForm required-validate">
