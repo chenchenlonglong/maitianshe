@@ -53,18 +53,18 @@ class ReduceController extends CommonController
         $sql=self::sql();
         $sql=$sql." where a.`audit_time` is  not null and a.`audit_name` is  not null";
         if($post){
-            if($post["user_name"]){
+            if(isset($post["user_name"])){
                 $sql=$sql." and  b.`e_user_name`='{$post["user_name"]}'";
             }
-            if($post["flag"]){
+            if(isset($post["flag"])){
                 $sql=$sql." and  a.`flag`='{$post["flag"]}'";
             }
-            if($post["start_time"]){
+            if(isset($post["start_time"])){
                 $start_time=strtotime($post["start_time"]);
                 $end_time=$start_time+60*60*24;
                 $sql=$sql." and  a.`time`>='{$start_time}' and a.`time`<'{$end_time}'";
             }
-            if($post["audit_time"]){
+            if(isset($post["audit_time"])){
                 $start_time=strtotime($post["audit_time"]);
                 $end_time=$start_time+60*60*24;
                 $sql=$sql." and  a.`audit_time`>='{$start_time}' and a.`audit_time`<'{$end_time}'";
