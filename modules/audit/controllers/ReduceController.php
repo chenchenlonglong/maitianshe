@@ -157,10 +157,10 @@ class ReduceController extends CommonController
         if($reduce_result["code"]==200){
           $reduceModel->updateAll(["flag"=>3004,"audit_time"=>time(),"audit_name"=>Tools::get_user_name()],["id"=>$id]);
           return Functions::return_json(200,"提现成功","","reduce_id_index","closeCurrent");
-      }
-
-        $reduceModel->updateAll(["flag"=>3004],["id"=>$id]);
-        return Functions::return_json(300,$reduce_result["data"]["return_msg"],"","reduce_id_index","closeCurrent");
+      }else{
+            $reduceModel->updateAll(["flag"=>3004],["id"=>$id]);
+            return Functions::return_json(300,"提现失败");
+        }
     }
 
 
