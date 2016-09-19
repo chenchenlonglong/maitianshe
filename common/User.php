@@ -67,9 +67,6 @@ class User
         $userModel = new UserModel();
         $time_first = strtotime(date("Y-m-d"));
         $time_sec = $time_first + 60 * 60 * 24;
-        var_dump($time_first);
-        var_dump($time_sec);
-        var_dump(date("Y-m-d"));
         $count = $userModel->find()->where(["and", [">=", "reg_time", $time_first], ["<=", "reg_time", $time_sec], ["e_user_level" => 2]])->count();
         return $count;
     }
