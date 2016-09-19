@@ -10,7 +10,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'defaultRoute' => 'index', //默认控制器
-    'timeZone'=>'Asia/Chongqing',//时区
+//    'timeZone'=>'Asia/Chongqing',//时区
     'modules' => [
         'admin' => ['class' => 'app\modules\admin\Admin'],
         'invite' => ['class' => 'app\modules\invite\Invite'],
