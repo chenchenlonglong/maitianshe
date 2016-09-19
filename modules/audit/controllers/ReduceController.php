@@ -35,7 +35,7 @@ class ReduceController extends CommonController
         $result=$reduceModel->findBySql($sql)->asArray()->all();
         $data=$reduceModel->getPage_by_sql($result,$page[0],$page[1]);
         $start=($page[0]-1)*$page[1];
-        $sql=$sql."order by  a.`time` asc   limit {$start},{$page[1]};";
+        $sql=$sql."order by  a.`time` desc   limit {$start},{$page[1]};";
         $result=$reduceModel->findBySql($sql)->asArray()->all();
         $data["data"]=$result;
         return    $this->renderPartial("index",["data"=>$data]);
