@@ -9,7 +9,9 @@ namespace app\common;
 
 
 use app\models\AdminrelationModel;
+use app\models\InviteModel;
 use app\models\UserModel;
+use app\modules\invite\Invite;
 
 class User
 {
@@ -64,10 +66,13 @@ class User
      */
     public static function get_today_user_count()
     {
-        $userModel = new UserModel();
+
         $time_first = strtotime(date("Y-m-d"));
         $time_sec = $time_first + 60 * 60 * 24;
-        $count = $userModel->find()->where(["and", [">=", "reg_time", $time_first], ["<=", "reg_time", $time_sec], ["e_user_level" => 2]])->count();
+        //$userModel = new UserModel();
+        //$count = $userModel->find()->where(["and", [">=", "reg_time", $time_first], ["<=", "reg_time", $time_sec], ["e_user_level" => 2]])->count();
+        $inviteModel = new InviteModel();
+        $count = $inviteModel->find()->where(["and", [">=", "active_time", $time_first], ["<=", "active_time", $time_sec], ["invition_flag" => 2]])->count();
         return $count;
     }
 
