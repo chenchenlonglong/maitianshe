@@ -27,7 +27,7 @@
             <span>+</span></div>
     </form>
     <div class="connect">
-        <p>  qq:1004076836</p>
+        <p></p>
         <p>
             <a class="facebook" href=""></a>
             <a class="twitter" href=""></a>

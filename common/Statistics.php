@@ -284,7 +284,6 @@ class Statistics
         $true_in_money = Statistics::count_true_money($user_id,$flag,$start_time,$end_time);
         //计算总共支出多少提现资金
         $true_out_money = Statistics::reduce_total_money($user_id);
-
         return $true_in_money-$true_out_money;
     }
 
