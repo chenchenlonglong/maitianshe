@@ -27,3 +27,4 @@ composer.phar
 #/phpunit.xml
 /web/reduce.txt
 /web/params.txt
+/config/db.php
