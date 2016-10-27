@@ -49,6 +49,7 @@ use yii\helpers\Url;
                 <th width="80">编号</th>
                 <th width="100">商品名称</th>
                 <th width="125">货号</th>
+                <th width="125">麦田商品货号</th>
                 <th width="80">价格</th>
                 <th width="80">参团人数</th>
                 <th width="125">任务组</th>
@@ -67,6 +68,7 @@ use yii\helpers\Url;
                     <td><?php echo $value["goods_id"];?></td>
                     <td><?php echo $value["goods_name"];?></td>
                     <td><?php echo $value["goods_sn"];?></td>
+                    <td><?php echo $value["maitian_goods_sn"];?></td>
                     <td><?php echo $value["shop_price"];?></td>
                     <td><?php echo $value["team_num"];?></td>
                     <td><?php  if(!empty($value["task_level"])){ echo $task[$value["task_level"]-1]["task_name"]; }else{ echo "";} ;?></td>
