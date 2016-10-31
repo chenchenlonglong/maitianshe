@@ -26,17 +26,17 @@
             <table class="searchContent">
                 <tr>
                     <td>
-                        电话号码：<input type="text" name="phone" value="<?php  echo isset($data['phone'])?$data['phone']:"";?>" />
+                        电话号码：<input type="text" name="phone" value="<?php  echo isset($where['phone'])?$where['phone']:"";?>" />
                     </td>
                     <td>
-                        订单编号：<input type="text" name="order_id" value="<?php  echo isset($data['order_id'])?$data['order_id']:"";?>" />
+                        订单编号：<input type="text" name="order_id" value="<?php  echo isset($where['order_id'])?$where['order_id']:"";?>" />
                     </td>
                     <td>
                        处理结果
                         <select name="result">
                             <option value="">请选择</option>
-                            <option value="0">正在处理</option>
-                            <option value="1">售后完毕</option>
+                            <option value="0" <?php if($where["result"]==="0"){echo 'selected="selected"';}?>>正在处理</option>
+                            <option value="1"  <?php if($where["result"]==="1"){echo 'selected="selected"';}?>>售后完毕</option>
                         </select>
                     </td>
                     <td><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
@@ -88,7 +88,7 @@
                       <span>提交</span>
                      </a>
                      <?php }else{?>
-                   <a  href="<?php echo  \yii\helpers\Url::toRoute(["index/push"])."&id=".$value["id"];?>"    max="true"  target="navTab">
+                   <a  href="<?php echo  \yii\helpers\Url::toRoute(["index/detail"])."&id=".$value["id"];?>"    max="true"  target="navTab">
                        <span>详情</span>
                    </a>
                      <?php }?>
